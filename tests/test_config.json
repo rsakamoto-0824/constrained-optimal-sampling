@@ -1,0 +1,19 @@
+{
+  "_about": "自動テスト用の小規模設定（tests/test_study.m が使う）。base_config に記載項目だけを上書きする。",
+  "base_config": "../config/default_config.json",
+  "study": {"name": "unit_test", "output_dir": "results_test"},
+  "howa": {"orders": [3, 5]},
+  "sweep": {"mode": "adaptive", "step": 1, "adaptive_fine_until": 9, "adaptive_coarse_step": 5},
+  "optimizer": {"n_starts": 2},
+  "random_sampling": {"n_draws": 4},
+  "poisson": {"n_starts": 2},
+  "soft_constraint_study": {"howa_orders": [5], "n_shots": [9], "weights": [0, 5]},
+  "monte_carlo": {"n_wafers": 30},
+  "conditions": [
+    {"name": "nominal", "mark_noise_level": "nominal", "scan_scale": 1.0},
+    {"name": "scan_x0", "mark_noise_level": "nominal", "scan_scale": 0.0}
+  ],
+  "statistics": {"bootstrap_samples": 100},
+  "appendix": {"howa_order": 5, "n_shots": 9},
+  "figures": {"map_n_shots": [9], "reference_n_shots": 9}
+}
