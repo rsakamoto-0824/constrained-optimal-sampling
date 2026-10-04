@@ -4,3 +4,28 @@ __pycache__/
 *.pyc
 .env
 .env.local
+
+# MATLAB
+*.asv
+*.mex*
+
+# 動作確認・テストの出力（再生成できる）
+results_smoke/
+results_test/
+# 本計算の中間ファイル（再生成できる。約100MB）
+results/study_results.mat
+# 図は report/figures に報告書で使う分を登録する（results/figures は再生成できる）
+results/figures/
+
+# 参考文献の本文ファイル（著作物のためリポジトリには入れない。Zoteroからリンク添付）
+references/sources/
+
+# LaTeX の中間ファイル・PDF（正本は tex。PDFは Overleaf かローカルで生成）
+report/*.aux
+report/*.log
+report/*.out
+report/*.toc
+report/*.synctex.gz
+report/*.fls
+report/*.fdb_latexmk
+report/*.pdf

@@ -1,0 +1,1101 @@
+{
+ "base": "/Users/sakamoto/04_プログラミング/ClaudeCode/GitHub/constrained-optimal-sampling/references",
+ "case_collection": "2026-10-04_制約付き最適サンプリング評価",
+ "unread_tag": "未読",
+ "items": [
+  {
+   "key": "wang2009",
+   "itemType": "conferencePaper",
+   "title": "Overlay improvement by ASML HOWA 5th alignment strategy",
+   "collection": "01_半導体プロセス",
+   "tags": [
+    "種別/論文",
+    "掲載誌/SPIE Proceedings",
+    "分野/オーバーレイ・EPE",
+    "所属/Inotera",
+    "所属/ASML"
+   ],
+   "creators": [
+    {
+     "lastName": "Wang",
+     "firstName": "Raf",
+     "creatorType": "author"
+    },
+    {
+     "lastName": "Chiang",
+     "firstName": "CY",
+     "creatorType": "author"
+    },
+    {
+     "lastName": "Hsu",
+     "firstName": "Wilson",
+     "creatorType": "author"
+    },
+    {
+     "lastName": "Yang",
+     "firstName": "Richer",
+     "creatorType": "author"
+    },
+    {
+     "lastName": "Shih",
+     "firstName": "Todd",
+     "creatorType": "author"
+    },
+    {
+     "lastName": "Chen",
+     "firstName": "Jackie",
+     "creatorType": "author"
+    },
+    {
+     "lastName": "Chiu",
+     "firstName": "Jonathan",
+     "creatorType": "author"
+    },
+    {
+     "lastName": "Lin",
+     "firstName": "Wythe",
+     "creatorType": "author"
+    }
+   ],
+   "date": "2009",
+   "fields": {
+    "url": "https://doi.org/10.1117/12.839816",
+    "proceedingsTitle": "Proc. SPIE 7520 (Lithography Asia 2009)",
+    "pages": "752023",
+    "DOI": "10.1117/12.839816",
+    "publisher": "SPIE"
+   },
+   "importId": "constrained-sampling:f1debe204609619d826c14af72d75231ab5fd4ec724e4ff19ef41e725d62eaef",
+   "status": "not_obtained",
+   "reason": "SPIE Digital Library の有料論文（購読なし）"
+  },
+  {
+   "key": "pike2012",
+   "itemType": "conferencePaper",
+   "title": "High-order wafer alignment in manufacturing",
+   "collection": "01_半導体プロセス",
+   "tags": [
+    "種別/論文",
+    "掲載誌/SPIE Proceedings",
+    "分野/オーバーレイ・EPE",
+    "所属/IBM",
+    "所属/GLOBALFOUNDRIES",
+    "所属/ASML"
+   ],
+   "creators": [
+    {
+     "lastName": "Pike",
+     "firstName": "Michael",
+     "creatorType": "author"
+    },
+    {
+     "lastName": "Felix",
+     "firstName": "Nelson",
+     "creatorType": "author"
+    },
+    {
+     "lastName": "Menon",
+     "firstName": "Vinayan",
+     "creatorType": "author"
+    },
+    {
+     "lastName": "Ausschnitt",
+     "firstName": "Christopher",
+     "creatorType": "author"
+    },
+    {
+     "lastName": "Wiltshire",
+     "firstName": "Timothy",
+     "creatorType": "author"
+    },
+    {
+     "lastName": "Meyers",
+     "firstName": "Sheldon",
+     "creatorType": "author"
+    },
+    {
+     "lastName": "Kim",
+     "firstName": "Won",
+     "creatorType": "author"
+    },
+    {
+     "lastName": "Minghetti",
+     "firstName": "Blandine",
+     "creatorType": "author"
+    }
+   ],
+   "date": "2012",
+   "fields": {
+    "url": "https://doi.org/10.1117/12.916483",
+    "proceedingsTitle": "Proc. SPIE 8324",
+    "pages": "832408",
+    "DOI": "10.1117/12.916483",
+    "publisher": "SPIE"
+   },
+   "importId": "constrained-sampling:690284d21af96499bdd89472dc6cb9330741426776325012698ae4e25657b38b",
+   "status": "not_obtained",
+   "reason": "SPIE Digital Library の有料論文（購読なし）"
+  },
+  {
+   "key": "jeon2013",
+   "itemType": "conferencePaper",
+   "title": "High order wafer alignment for 20nm node logic process",
+   "collection": "01_半導体プロセス",
+   "tags": [
+    "種別/論文",
+    "掲載誌/SPIE Proceedings",
+    "分野/オーバーレイ・EPE"
+   ],
+   "creators": [
+    {
+     "lastName": "Jeon",
+     "firstName": "Bumhwan",
+     "creatorType": "author"
+    },
+    {
+     "lastName": "Pal",
+     "firstName": "Shyam",
+     "creatorType": "author"
+    },
+    {
+     "lastName": "Mehta",
+     "firstName": "Sohan",
+     "creatorType": "author"
+    },
+    {
+     "lastName": "Lokesh",
+     "firstName": "Subramany",
+     "creatorType": "author"
+    },
+    {
+     "lastName": "Jiang",
+     "firstName": "Yun Tao",
+     "creatorType": "author"
+    },
+    {
+     "lastName": "Li",
+     "firstName": "Chen",
+     "creatorType": "author"
+    },
+    {
+     "lastName": "Yelverton",
+     "firstName": "Mark",
+     "creatorType": "author"
+    },
+    {
+     "lastName": "Wei",
+     "firstName": "Yayi",
+     "creatorType": "author"
+    }
+   ],
+   "date": "2013",
+   "fields": {
+    "url": "https://doi.org/10.1117/12.2010709",
+    "proceedingsTitle": "Proc. SPIE 8681",
+    "pages": "868110",
+    "DOI": "10.1117/12.2010709",
+    "publisher": "SPIE"
+   },
+   "importId": "constrained-sampling:84c9365f4944708b1e410923cb0315ad53bfa809fc62765cb0bd9c2704d4d6e8",
+   "status": "not_obtained",
+   "reason": "SPIE Digital Library の有料論文（購読なし）"
+  },
+  {
+   "key": "us9291916",
+   "itemType": "patent",
+   "title": "Method of applying a pattern to a substrate, device manufacturing method and lithographic apparatus for use in such methods",
+   "collection": "05_資料",
+   "tags": [
+    "種別/資料",
+    "分野/オーバーレイ・EPE",
+    "所属/ASML"
+   ],
+   "creators": [
+    {
+     "lastName": "Van Der Sanden",
+     "firstName": "Stefan Cornelis Theodorus",
+     "creatorType": "inventor"
+    },
+    {
+     "lastName": "Van Haren",
+     "firstName": "Richard Johannes Franciscus",
+     "creatorType": "inventor"
+    },
+    {
+     "lastName": "Simons",
+     "firstName": "Hubertus Johannes Gertrudus",
+     "creatorType": "inventor"
+    },
+    {
+     "lastName": "Edart",
+     "firstName": "Remi Daniel Marie",
+     "creatorType": "inventor"
+    },
+    {
+     "lastName": "Wei",
+     "firstName": "Xiuhong",
+     "creatorType": "inventor"
+    },
+    {
+     "lastName": "Lyulina",
+     "firstName": "Irina",
+     "creatorType": "inventor"
+    },
+    {
+     "lastName": "Kubis",
+     "firstName": "Michael",
+     "creatorType": "inventor"
+    }
+   ],
+   "date": "2016-03-22",
+   "fields": {
+    "url": "https://patents.google.com/patent/US9291916B2/en",
+    "patentNumber": "US9291916B2",
+    "assignee": "ASML Netherlands B.V.",
+    "country": "US",
+    "issueDate": "2016-03-22"
+   },
+   "importId": "constrained-sampling:b47f0fada7331d2efeb93756e03f49bbe71e39627335e93291d1ad0df5fdc3f8",
+   "status": "obtained",
+   "reason": "",
+   "file": "sources/2016_ASML_US9291916B2 Method of applying a pattern to a substrate (HOWA).pdf"
+  },
+  {
+   "key": "koay2010",
+   "itemType": "conferencePaper",
+   "title": "Automated optimized overlay sampling for high-order processing in double patterning lithography",
+   "collection": "01_半導体プロセス",
+   "tags": [
+    "種別/論文",
+    "掲載誌/SPIE Proceedings",
+    "分野/オーバーレイ・EPE"
+   ],
+   "creators": [
+    {
+     "lastName": "Koay",
+     "firstName": "Chiew-seng",
+     "creatorType": "author"
+    },
+    {
+     "lastName": "Colburn",
+     "firstName": "Matthew E.",
+     "creatorType": "author"
+    },
+    {
+     "lastName": "Izikson",
+     "firstName": "Pavel",
+     "creatorType": "author"
+    },
+    {
+     "lastName": "Robinson",
+     "firstName": "John C.",
+     "creatorType": "author"
+    },
+    {
+     "lastName": "Kato",
+     "firstName": "Cindy",
+     "creatorType": "author"
+    },
+    {
+     "lastName": "Kurita",
+     "firstName": "Hiroyuki",
+     "creatorType": "author"
+    },
+    {
+     "lastName": "Nagaswami",
+     "firstName": "Venkat",
+     "creatorType": "author"
+    }
+   ],
+   "date": "2010",
+   "fields": {
+    "url": "https://doi.org/10.1117/12.846371",
+    "proceedingsTitle": "Proc. SPIE 7638",
+    "pages": "76381R",
+    "DOI": "10.1117/12.846371",
+    "publisher": "SPIE"
+   },
+   "importId": "constrained-sampling:47fb5338d12f7a89abbfa05543def95a070323f43d06195f2be2be60191995df",
+   "status": "not_obtained",
+   "reason": "SPIE Digital Library の有料論文（購読なし）"
+  },
+  {
+   "key": "chiu2022a",
+   "itemType": "conferencePaper",
+   "title": "A comprehensive study of scanner alignment mark quantity and layout-dependent effect for overlay performance optimization",
+   "collection": "01_半導体プロセス",
+   "tags": [
+    "種別/論文",
+    "掲載誌/SPIE Proceedings",
+    "分野/オーバーレイ・EPE"
+   ],
+   "creators": [
+    {
+     "lastName": "Chiu",
+     "firstName": "Chieh-Chen",
+     "creatorType": "author"
+    },
+    {
+     "lastName": "Tian",
+     "firstName": "Feng",
+     "creatorType": "author"
+    },
+    {
+     "lastName": "Feng",
+     "firstName": "Wei",
+     "creatorType": "author"
+    },
+    {
+     "lastName": "Gao",
+     "firstName": "Mingqi",
+     "creatorType": "author"
+    },
+    {
+     "lastName": "Lan",
+     "firstName": "Andy",
+     "creatorType": "author"
+    },
+    {
+     "lastName": "Zhong",
+     "firstName": "Shengyuan",
+     "creatorType": "author"
+    },
+    {
+     "lastName": "Tsou",
+     "firstName": "Chaojen",
+     "creatorType": "author"
+    },
+    {
+     "lastName": "Zhu",
+     "firstName": "Ningqi",
+     "creatorType": "author"
+    },
+    {
+     "lastName": "Zhu",
+     "firstName": "Jin",
+     "creatorType": "author"
+    },
+    {
+     "lastName": "Pei",
+     "firstName": "Jincheng",
+     "creatorType": "author"
+    },
+    {
+     "lastName": "Huang",
+     "firstName": "Kevin",
+     "creatorType": "author"
+    }
+   ],
+   "date": "2022",
+   "fields": {
+    "url": "https://doi.org/10.1117/12.2614375",
+    "proceedingsTitle": "Proc. SPIE 12053",
+    "pages": "1205319",
+    "DOI": "10.1117/12.2614375",
+    "publisher": "SPIE"
+   },
+   "importId": "constrained-sampling:bb481b262fa8731b47fef39e9dd85cb3d09b05826743aec16d717fa3e6b314a1",
+   "status": "not_obtained",
+   "reason": "SPIE Digital Library の有料論文（購読なし）"
+  },
+  {
+   "key": "chiu2022b",
+   "itemType": "conferencePaper",
+   "title": "A new development algorithm to optimize scanner alignment sampling for cross-chuck overlay performance optimization",
+   "collection": "01_半導体プロセス",
+   "tags": [
+    "種別/論文",
+    "掲載誌/SPIE Proceedings",
+    "分野/オーバーレイ・EPE"
+   ],
+   "creators": [
+    {
+     "lastName": "Chiu",
+     "firstName": "Chieh-Chen",
+     "creatorType": "author"
+    },
+    {
+     "lastName": "Tian",
+     "firstName": "Feng",
+     "creatorType": "author"
+    },
+    {
+     "lastName": "Feng",
+     "firstName": "Wei",
+     "creatorType": "author"
+    },
+    {
+     "lastName": "Gao",
+     "firstName": "Mingqi",
+     "creatorType": "author"
+    },
+    {
+     "lastName": "Lan",
+     "firstName": "Andy",
+     "creatorType": "author"
+    },
+    {
+     "lastName": "Tsou",
+     "firstName": "Chao-jen",
+     "creatorType": "author"
+    },
+    {
+     "lastName": "Zhong",
+     "firstName": "Shengyuan",
+     "creatorType": "author"
+    },
+    {
+     "lastName": "Birnstein",
+     "firstName": "Norman",
+     "creatorType": "author"
+    },
+    {
+     "lastName": "Zech",
+     "firstName": "Robin Maximilian",
+     "creatorType": "author"
+    },
+    {
+     "lastName": "Utzny",
+     "firstName": "Clemens",
+     "creatorType": "author"
+    },
+    {
+     "lastName": "Zhu",
+     "firstName": "Jin",
+     "creatorType": "author"
+    },
+    {
+     "lastName": "Pei",
+     "firstName": "Jincheng",
+     "creatorType": "author"
+    },
+    {
+     "lastName": "Huang",
+     "firstName": "Kevin",
+     "creatorType": "author"
+    }
+   ],
+   "date": "2022",
+   "fields": {
+    "url": "https://doi.org/10.1117/12.2627283",
+    "proceedingsTitle": "Proc. SPIE 12053",
+    "DOI": "10.1117/12.2627283",
+    "publisher": "SPIE"
+   },
+   "importId": "constrained-sampling:e1f98d264aa1e3175b5fa68e653fa1c68e6526945746fc5ceda5f1dc5a790f8c",
+   "status": "not_obtained",
+   "reason": "SPIE Digital Library の有料論文（購読なし）"
+  },
+  {
+   "key": "us7197722",
+   "itemType": "patent",
+   "title": "Optimization of sample plan for overlay",
+   "collection": "05_資料",
+   "tags": [
+    "種別/資料",
+    "分野/オーバーレイ・EPE",
+    "所属/Intel"
+   ],
+   "creators": [
+    {
+     "lastName": "Wong",
+     "firstName": "Alan",
+     "creatorType": "inventor"
+    },
+    {
+     "lastName": "Drautz",
+     "firstName": "Jeff",
+     "creatorType": "inventor"
+    },
+    {
+     "lastName": "Shindler",
+     "firstName": "Joseph D.",
+     "creatorType": "inventor"
+    },
+    {
+     "lastName": "Lau",
+     "firstName": "Max",
+     "creatorType": "inventor"
+    },
+    {
+     "lastName": "Chen",
+     "firstName": "George",
+     "creatorType": "inventor"
+    }
+   ],
+   "date": "2007-03-27",
+   "fields": {
+    "url": "https://patents.google.com/patent/US7197722B2/en",
+    "patentNumber": "US7197722B2",
+    "assignee": "Intel Corporation",
+    "country": "US",
+    "issueDate": "2007-03-27"
+   },
+   "importId": "constrained-sampling:b0c27be745b895ae4f27e430be6c443cd610952e35a3e1cc13e1c5f8a6d90c30",
+   "status": "obtained",
+   "reason": "",
+   "file": "sources/2007_Intel_US7197722B2 Optimization of sample plan for overlay.pdf"
+  },
+  {
+   "key": "us7571420",
+   "itemType": "patent",
+   "title": "Dynamic sampling with efficient model for overlay",
+   "collection": "05_資料",
+   "tags": [
+    "種別/資料",
+    "分野/オーバーレイ・EPE",
+    "所属/Intel"
+   ],
+   "creators": [
+    {
+     "lastName": "Wong",
+     "firstName": "Alan",
+     "creatorType": "inventor"
+    },
+    {
+     "lastName": "Drautz",
+     "firstName": "Jeff",
+     "creatorType": "inventor"
+    },
+    {
+     "lastName": "Shindler",
+     "firstName": "Joseph D.",
+     "creatorType": "inventor"
+    },
+    {
+     "lastName": "Lau",
+     "firstName": "Max",
+     "creatorType": "inventor"
+    },
+    {
+     "lastName": "Chen",
+     "firstName": "George",
+     "creatorType": "inventor"
+    }
+   ],
+   "date": "2009-08-04",
+   "fields": {
+    "url": "https://patents.google.com/patent/US7571420B2/en",
+    "patentNumber": "US7571420B2",
+    "assignee": "Intel Corporation",
+    "country": "US",
+    "issueDate": "2009-08-04"
+   },
+   "importId": "constrained-sampling:a2f752878522a4ee41e5c926174cd1242bbc2a9b0d4064d8fb560b82175edab0",
+   "status": "obtained",
+   "reason": "",
+   "file": "sources/2009_Intel_US7571420B2 Dynamic sampling with efficient model for overlay.pdf"
+  },
+  {
+   "key": "us7042552",
+   "itemType": "patent",
+   "title": "Alignment strategy optimization method",
+   "collection": "05_資料",
+   "tags": [
+    "種別/資料",
+    "分野/オーバーレイ・EPE",
+    "所属/ASML"
+   ],
+   "creators": [
+    {
+     "lastName": "Werkman",
+     "firstName": "Roy",
+     "creatorType": "inventor"
+    },
+    {
+     "lastName": "Van Bilsen",
+     "firstName": "Franciscus Bernardus Maria",
+     "creatorType": "inventor"
+    },
+    {
+     "lastName": "Swinnen",
+     "firstName": "Bart",
+     "creatorType": "inventor"
+    }
+   ],
+   "date": "2006-05-09",
+   "fields": {
+    "url": "https://patents.google.com/patent/US7042552B1/en",
+    "patentNumber": "US7042552B1",
+    "assignee": "ASML Netherlands B.V.",
+    "country": "US",
+    "issueDate": "2006-05-09"
+   },
+   "importId": "constrained-sampling:390ca5c4d451acf3391105375cde96e591240f73d58dae1f19bfb790f3da4911",
+   "status": "obtained",
+   "reason": "",
+   "file": "sources/2006_ASML_US7042552B1 Alignment strategy optimization method.pdf"
+  },
+  {
+   "key": "us11775728",
+   "itemType": "patent",
+   "title": "Methods for sample scheme generation and optimization",
+   "collection": "05_資料",
+   "tags": [
+    "種別/資料",
+    "分野/オーバーレイ・EPE",
+    "所属/ASML"
+   ],
+   "creators": [
+    {
+     "lastName": "Frisco",
+     "firstName": "Pierluigi",
+     "creatorType": "inventor"
+    }
+   ],
+   "date": "2023-10-03",
+   "fields": {
+    "url": "https://patents.google.com/patent/US11775728B2/en",
+    "patentNumber": "US11775728B2",
+    "assignee": "ASML Netherlands B.V.",
+    "country": "US",
+    "issueDate": "2023-10-03"
+   },
+   "importId": "constrained-sampling:3e164b25c579ddbad560145d4fde592a2165a4971ecfdbcb85c2cb1745dc4ca9",
+   "status": "obtained",
+   "reason": "",
+   "file": "sources/2023_ASML_US11775728B2 Methods for sample scheme generation and optimization.pdf"
+  },
+  {
+   "key": "canon_ms001",
+   "itemType": "webpage",
+   "title": "New Canon wafer measurement equipment improves productivity of lithography systems, enabling high-precision alignment for increasingly complex semiconductor manufacturing processes",
+   "collection": "05_資料",
+   "tags": [
+    "種別/資料",
+    "分野/オーバーレイ・EPE",
+    "所属/Canon"
+   ],
+   "creators": [],
+   "date": "2023-02-21",
+   "fields": {
+    "url": "https://global.canon/en/news/2023/20230221.html",
+    "accessDate": "2026-10-04"
+   },
+   "importId": "constrained-sampling:1cd90b0433e0ec1c350b23f5ffe96c89f8cfa48402582322e76fe2bd88e653b3",
+   "status": "obtained",
+   "reason": "",
+   "file": "sources/web/2023_Canon_MS-001 wafer measurement equipment news.html"
+  },
+  {
+   "key": "fedorov1972",
+   "itemType": "book",
+   "title": "Theory of Optimal Experiments",
+   "collection": "04_統計",
+   "tags": [
+    "種別/書籍",
+    "分野/実験計画法"
+   ],
+   "creators": [
+    {
+     "lastName": "Fedorov",
+     "firstName": "V. V.",
+     "creatorType": "author"
+    }
+   ],
+   "date": "1972",
+   "fields": {
+    "publisher": "Academic Press"
+   },
+   "importId": "constrained-sampling:d71a5c520b539c27675eaeb5327e00e2942bfa6af482360385d543044d414d49",
+   "status": "not_obtained",
+   "reason": "書籍（購入が必要）"
+  },
+  {
+   "key": "mitchell1974",
+   "itemType": "journalArticle",
+   "title": "An algorithm for the construction of \"D-optimal\" experimental designs",
+   "collection": "04_統計",
+   "tags": [
+    "種別/論文",
+    "掲載誌/Technometrics",
+    "分野/実験計画法"
+   ],
+   "creators": [
+    {
+     "lastName": "Mitchell",
+     "firstName": "Toby J.",
+     "creatorType": "author"
+    }
+   ],
+   "date": "1974",
+   "fields": {
+    "url": "https://doi.org/10.1080/00401706.1974.10489175",
+    "publicationTitle": "Technometrics",
+    "volume": "16",
+    "issue": "2",
+    "pages": "203-210",
+    "DOI": "10.1080/00401706.1974.10489175"
+   },
+   "importId": "constrained-sampling:1fe9ff963c8b1c9c3f3b6f7c2306052f09f9029a589bc7abfb006e4f68ceba84",
+   "status": "not_obtained",
+   "reason": "Taylor & Francis（Technometrics）の有料論文"
+  },
+  {
+   "key": "cook1980",
+   "itemType": "journalArticle",
+   "title": "A comparison of algorithms for constructing exact D-optimal designs",
+   "collection": "04_統計",
+   "tags": [
+    "種別/論文",
+    "掲載誌/Technometrics",
+    "分野/実験計画法"
+   ],
+   "creators": [
+    {
+     "lastName": "Cook",
+     "firstName": "R. Dennis",
+     "creatorType": "author"
+    },
+    {
+     "lastName": "Nachtsheim",
+     "firstName": "Christopher J.",
+     "creatorType": "author"
+    }
+   ],
+   "date": "1980",
+   "fields": {
+    "url": "https://doi.org/10.1080/00401706.1980.10486162",
+    "publicationTitle": "Technometrics",
+    "volume": "22",
+    "issue": "3",
+    "pages": "315-324",
+    "DOI": "10.1080/00401706.1980.10486162"
+   },
+   "importId": "constrained-sampling:0df39d57f0c4e74ca25f95ec54dbce325e4a98147c795fd6e4b648e482640c44",
+   "status": "not_obtained",
+   "reason": "Taylor & Francis（Technometrics）の有料論文"
+  },
+  {
+   "key": "dykstra1971",
+   "itemType": "journalArticle",
+   "title": "The augmentation of experimental data to maximize |X'X|",
+   "collection": "04_統計",
+   "tags": [
+    "種別/論文",
+    "掲載誌/Technometrics",
+    "分野/実験計画法"
+   ],
+   "creators": [
+    {
+     "lastName": "Dykstra",
+     "firstName": "Otto",
+     "creatorType": "author"
+    }
+   ],
+   "date": "1971",
+   "fields": {
+    "url": "https://doi.org/10.1080/00401706.1971.10488830",
+    "publicationTitle": "Technometrics",
+    "volume": "13",
+    "issue": "3",
+    "pages": "682-688",
+    "DOI": "10.1080/00401706.1971.10488830"
+   },
+   "importId": "constrained-sampling:edd596203b28e6f75c8bbe3b37a8fc662839b0e41589699bbd12baac3fb461b2",
+   "status": "not_obtained",
+   "reason": "Taylor & Francis（Technometrics）の有料論文"
+  },
+  {
+   "key": "meyer1995",
+   "itemType": "journalArticle",
+   "title": "The coordinate-exchange algorithm for constructing exact optimal experimental designs",
+   "collection": "04_統計",
+   "tags": [
+    "種別/論文",
+    "掲載誌/Technometrics",
+    "分野/実験計画法"
+   ],
+   "creators": [
+    {
+     "lastName": "Meyer",
+     "firstName": "Ruth K.",
+     "creatorType": "author"
+    },
+    {
+     "lastName": "Nachtsheim",
+     "firstName": "Christopher J.",
+     "creatorType": "author"
+    }
+   ],
+   "date": "1995",
+   "fields": {
+    "url": "https://doi.org/10.1080/00401706.1995.10485889",
+    "publicationTitle": "Technometrics",
+    "volume": "37",
+    "issue": "1",
+    "pages": "60-69",
+    "DOI": "10.1080/00401706.1995.10485889"
+   },
+   "importId": "constrained-sampling:8d77b80456b80e382d677ee2c03464f9a83283b26971dda1dd10e15971529433",
+   "status": "not_obtained",
+   "reason": "Taylor & Francis（Technometrics）の有料論文"
+  },
+  {
+   "key": "atkinson2007",
+   "itemType": "book",
+   "title": "Optimum Experimental Designs, with SAS",
+   "collection": "04_統計",
+   "tags": [
+    "種別/書籍",
+    "分野/実験計画法"
+   ],
+   "creators": [
+    {
+     "lastName": "Atkinson",
+     "firstName": "A. C.",
+     "creatorType": "author"
+    },
+    {
+     "lastName": "Donev",
+     "firstName": "A. N.",
+     "creatorType": "author"
+    },
+    {
+     "lastName": "Tobias",
+     "firstName": "R. D.",
+     "creatorType": "author"
+    }
+   ],
+   "date": "2007",
+   "fields": {
+    "publisher": "Oxford University Press"
+   },
+   "importId": "constrained-sampling:460d29eebead0cac2a25e4961ec514defe865d85c3dd003dc2312f5f9240bf45",
+   "status": "not_obtained",
+   "reason": "書籍（購入が必要）"
+  },
+  {
+   "key": "goos2011",
+   "itemType": "book",
+   "title": "Optimal Design of Experiments: A Case Study Approach",
+   "collection": "04_統計",
+   "tags": [
+    "種別/書籍",
+    "分野/実験計画法"
+   ],
+   "creators": [
+    {
+     "lastName": "Goos",
+     "firstName": "Peter",
+     "creatorType": "author"
+    },
+    {
+     "lastName": "Jones",
+     "firstName": "Bradley",
+     "creatorType": "author"
+    }
+   ],
+   "date": "2011",
+   "fields": {
+    "publisher": "Wiley"
+   },
+   "importId": "constrained-sampling:84d17d949e56b9b1951af3f6d060419868c5fb43637cf7cb3d1c1462de6f5b11",
+   "status": "not_obtained",
+   "reason": "書籍（購入が必要）"
+  },
+  {
+   "key": "jones2012",
+   "itemType": "journalArticle",
+   "title": "I-optimal versus D-optimal split-plot response surface designs",
+   "collection": "04_統計",
+   "tags": [
+    "種別/論文",
+    "掲載誌/Journal of Quality Technology",
+    "分野/実験計画法"
+   ],
+   "creators": [
+    {
+     "lastName": "Jones",
+     "firstName": "Bradley",
+     "creatorType": "author"
+    },
+    {
+     "lastName": "Goos",
+     "firstName": "Peter",
+     "creatorType": "author"
+    }
+   ],
+   "date": "2012",
+   "fields": {
+    "url": "https://doi.org/10.1080/00224065.2012.11917886",
+    "publicationTitle": "Journal of Quality Technology",
+    "volume": "44",
+    "issue": "2",
+    "pages": "85-101",
+    "DOI": "10.1080/00224065.2012.11917886"
+   },
+   "importId": "constrained-sampling:aaf3fdea811f71659bcce313ec691bdb5fb109d379d4f517c0f677ec3307abfa",
+   "status": "not_obtained",
+   "reason": "Taylor & Francis（Journal of Quality Technology）の有料論文"
+  },
+  {
+   "key": "wyant1992",
+   "itemType": "bookSection",
+   "title": "Basic wavefront aberration theory for optical metrology",
+   "collection": "02_フォトニクス・光学シミュレーション",
+   "tags": [
+    "種別/書籍",
+    "分野/光学"
+   ],
+   "creators": [
+    {
+     "lastName": "Wyant",
+     "firstName": "James C.",
+     "creatorType": "author"
+    },
+    {
+     "lastName": "Creath",
+     "firstName": "Katherine",
+     "creatorType": "author"
+    }
+   ],
+   "date": "1992",
+   "fields": {
+    "url": "https://wp.optics.arizona.edu/jcwyant/wp-content/uploads/sites/13/2016/08/03-BasicAberrations_and_Optical_Testing.pdf",
+    "bookTitle": "Applied Optics and Optical Engineering, Vol. XI (Academic Press)",
+    "pages": "1-53",
+    "publisher": "Academic Press"
+   },
+   "importId": "constrained-sampling:eab45b0c2a7c8d03677b23725159b5e2c7248dcd4c323578e51c706b17939ed3",
+   "status": "obtained",
+   "reason": "",
+   "file": "sources/1992_Arizona_Wyant Creath Basic wavefront aberration theory for optical metrology.pdf"
+  },
+  {
+   "key": "bridson2007",
+   "itemType": "conferencePaper",
+   "title": "Fast Poisson disk sampling in arbitrary dimensions",
+   "collection": "04_統計",
+   "tags": [
+    "種別/論文",
+    "掲載誌/ACM SIGGRAPH",
+    "分野/サンプリング"
+   ],
+   "creators": [
+    {
+     "lastName": "Bridson",
+     "firstName": "Robert",
+     "creatorType": "author"
+    }
+   ],
+   "date": "2007",
+   "fields": {
+    "url": "https://www.cs.ubc.ca/~rbridson/docs/bridson-siggraph07-poissondisk.pdf",
+    "proceedingsTitle": "ACM SIGGRAPH 2007 Sketches",
+    "pages": "22",
+    "DOI": "10.1145/1278780.1278807"
+   },
+   "importId": "constrained-sampling:7103bdc2230b2a09c13b3904c7ed32a1de8a57e97280efec2338d3829f1d823e",
+   "status": "obtained",
+   "reason": "",
+   "file": "sources/2007_UBC_Bridson Fast Poisson disk sampling in arbitrary dimensions.pdf"
+  },
+  {
+   "key": "efron1993",
+   "itemType": "book",
+   "title": "An Introduction to the Bootstrap",
+   "collection": "04_統計",
+   "tags": [
+    "種別/書籍",
+    "分野/統計"
+   ],
+   "creators": [
+    {
+     "lastName": "Efron",
+     "firstName": "Bradley",
+     "creatorType": "author"
+    },
+    {
+     "lastName": "Tibshirani",
+     "firstName": "Robert J.",
+     "creatorType": "author"
+    }
+   ],
+   "date": "1993",
+   "fields": {
+    "publisher": "Chapman & Hall"
+   },
+   "importId": "constrained-sampling:d4a88788b5a0127504e5b66fcd1164f1987694532c0ce8ff11f5730a7889624a",
+   "status": "not_obtained",
+   "reason": "書籍（購入が必要）"
+  }
+ ],
+ "existing_references": [
+  {
+   "key": "chue2009",
+   "doi": "10.1117/12.837137",
+   "title": "Optimization of alignment/overlay sampling and marker layout to improve overlay performance for double patterning technology"
+  },
+  {
+   "key": "wo2020234028",
+   "doi": "",
+   "title": "Method for determining a sampling scheme, a semiconductor substrate measurement apparatus, a lithographic apparatus"
+  },
+  {
+   "key": "slonaker1988",
+   "doi": "10.1117/12.968404",
+   "title": "Enhanced global alignment for production optical lithography"
+  },
+  {
+   "key": "us5493402",
+   "doi": "",
+   "title": "EGA alignment method using a plurality of weighting coefficients"
+  },
+  {
+   "key": "nikon_litho_booster",
+   "doi": "",
+   "title": "Litho Booster Standalone Alignment Station"
+  },
+  {
+   "key": "adel2007",
+   "doi": "10.1117/12.778457",
+   "title": "The challenges of transitioning from linear to high-order overlay control in advanced lithography"
+  },
+  {
+   "key": "chiu2012",
+   "doi": "10.1117/12.916601",
+   "title": "Impacts of overlay correction model and metrology sampling scheme on device yield"
+  },
+  {
+   "key": "us20160334717",
+   "doi": "",
+   "title": "Method of determining a measurement subset of metrology points on a substrate, associated apparatus and computer program"
+  },
+  {
+   "key": "us20160299438",
+   "doi": "",
+   "title": "Method and apparatus for inspection and metrology"
+  },
+  {
+   "key": "us10692227",
+   "doi": "",
+   "title": "Determination of sampling maps for alignment measurements based on reduction of out of specification points"
+  },
+  {
+   "key": "us4918320",
+   "doi": "",
+   "title": "Alignment method usable in a step-and-repeat type exposure apparatus for either global or dye-by-dye alignment"
+  },
+  {
+   "key": "us12025924",
+   "doi": "",
+   "title": "Method of determining set of sample shot regions, method of obtaining measurement value, information processing apparatus, lithography apparatus, storage medium, and article manufacturing method"
+  },
+  {
+   "key": "jph1019512",
+   "doi": "",
+   "title": "Positioning method"
+  },
+  {
+   "key": "felix2011",
+   "doi": "10.1117/12.879532",
+   "title": "Overlay improvement roadmap: Strategies for scanner control and product disposition for 5-nm overlay"
+  },
+  {
+   "key": "lee2016",
+   "doi": "10.1117/12.2219037",
+   "title": "In-depth analysis of sampling optimization methods"
+  }
+ ]
+}

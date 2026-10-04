@@ -1,0 +1,4 @@
+howa_order,n_terms,n_lower_bound,n_min,sv_ratio_at_n_min,n_max,n_sweep_values
+3,10,3,3,0.0213607316025464,19,17
+4,15,4,4,0.00844118911881681,19,16
+5,21,6,6,0.0349827378135102,19,14

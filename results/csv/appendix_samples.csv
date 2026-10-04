@@ -1,0 +1,4 @@
+sample,wafer_id,rule,mean_rms_over_methods_nm,mean_improvement_pct,min_rms_over_methods_nm,scenario,howa_order,n_shots
+Sample 1 (typical),732,mean RMS over methods closest to its 0.5-quantile,1.31731778483884,23.8136947499985,0.993922741766932,base,4,12
+Sample 2 (large improvement),910,mean improvement of ciopt over comparators closest to its 0.9-quantile,1.3966676506627,32.1769182639184,0.912543551182908,base,4,12
+Sample 3 (difficult),724,largest minimum RMS over all methods,2.08651560397112,23.1589136775367,1.49442819343039,base,4,12

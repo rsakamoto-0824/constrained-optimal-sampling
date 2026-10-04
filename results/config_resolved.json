@@ -1,0 +1,380 @@
+{
+  "x_about": "制約付き最適サンプリング評価の設定ファイル（本計算用）。数値のうち『仮定値』と書いたものは実工程の値が未確定のため置いた仮の値で、READMEと報告書にも仮定値として記載している。単位: 長さmm、変位nm。",
+  "study": {
+    "name": "constrained_optimal_sampling",
+    "output_dir": "results",
+    "master_seed": 2.0261004E+7,
+    "x_note_master_seed": "すべての乱数（Wafer生成・Random・Poisson・最適化の初期解・bootstrap）はこの値から決まる。同じ値なら同じ結果になる。"
+  },
+  "wafer": {
+    "diameter_mm": 300,
+    "edge_exclusion_mm": 3,
+    "x_note": "edge_exclusion_mm は仮定値。usable半径 = diameter/2 - edge_exclusion。"
+  },
+  "shot": {
+    "width_mm": 26,
+    "height_mm": 33,
+    "pitch_x_mm": 26,
+    "pitch_y_mm": 33,
+    "grid_origin_mm": [
+      0,
+      0
+    ],
+    "x_note": "shotサイズ26x33mmは初期値。pitch・grid原点（どれか1つのshot中心の座標）は仮定値。"
+  },
+  "marks": {
+    "offsets_mm": [
+      [
+        -12,
+        -15.5
+      ],
+      [
+        12,
+        -15.5
+      ],
+      [
+        12,
+        15.5
+      ],
+      [
+        -12,
+        15.5
+      ]
+    ],
+    "x_note": "shot中心基準のmark相対位置（行=mark、列=dx,dy）。仮定値。行数を変えれば1 shotあたりのmark数も変わる。"
+  },
+  "scan": {
+    "assignment": "alternate_column",
+    "first_direction": "Up",
+    "csv_path": "",
+    "x_note": "assignment: alternate_column（隣接する列で交互）/ alternate_row（隣接する行で交互）/ checkerboard / all_up / csv。csvは列 shot_id,scan_direction（Up/Down）。"
+  },
+  "howa": {
+    "orders": [
+      3,
+      4,
+      5
+    ],
+    "normalization_radius_mm": 150,
+    "x_note": "u = x / normalization_radius_mm, v = y / normalization_radius_mm。総次数 order 以下の単項式すべてを使う。"
+  },
+  "sweep": {
+    "mode": "full",
+    "step": 1,
+    "max_fraction_of_candidates": 0.3333333333,
+    "adaptive_fine_until": 12,
+    "adaptive_coarse_step": 2,
+    "x_note": "計測shot数は N_min から floor(N_candidate * max_fraction) まで。mode=full は step 刻み、mode=adaptive は adaptive_fine_until までを step 刻み、それより上を adaptive_coarse_step 刻みにする。"
+  },
+  "constraints": {
+    "mode": "hard",
+    "soft_penalty_weight": 2,
+    "x_note_mode": "hard: 制約を満たす交換だけを許す。soft: 評価値から soft_penalty_weight × 違反shot数 を引く（D: log det、I: -log(平均予測分散) の単位）。",
+    "quadrant": {
+      "enabled": true,
+      "bound_mode": "fraction",
+      "target_fraction": [
+        0.25,
+        0.25,
+        0.25,
+        0.25
+      ],
+      "tolerance_fraction": 0.05,
+      "min_slack_shots": 1,
+      "explicit_lower": [],
+      "explicit_upper": [],
+      "x_note": "仮定値。fraction: L = floor(N*f - w), U = ceil(N*f + w), w = max(tolerance_fraction*N, min_slack_shots)。explicit: explicit_lower/upper（象限1〜4）をそのまま使う。象限はshot中心の角度で決め、軸上は反時計回り側の象限（中心shotは第1象限）とする。"
+    },
+    "radial": {
+      "enabled": true,
+      "boundaries_norm": [
+        0.5,
+        0.7
+      ],
+      "names": [
+        "Inner",
+        "Middle",
+        "Outer"
+      ],
+      "bound_mode": "fraction",
+      "target_fraction": [
+        0.3333333333,
+        0.3333333333,
+        0.3333333334
+      ],
+      "tolerance_fraction": 0.1,
+      "min_slack_shots": 1,
+      "explicit_lower": [],
+      "explicit_upper": [],
+      "x_note": "仮定値。boundaries_norm は正規化半径 r = sqrt(u^2+v^2) の境界（shot中心で判定）。target_fraction は proportional と書くと候補shot数に比例させる。"
+    },
+    "scan": {
+      "enabled": true,
+      "max_abs_difference": 1,
+      "x_note": "仮定値。|N_up - N_down| <= max_abs_difference。"
+    }
+  },
+  "mandatory": {
+    "shot_ids": [],
+    "positions_mm": [
+      [
+        0,
+        0
+      ],
+      [
+        78,
+        0
+      ],
+      [
+        -78,
+        0
+      ],
+      [
+        0,
+        99
+      ],
+      [
+        0,
+        -99
+      ]
+    ],
+    "x_note": "仮定値。shot_ids が空のときは positions_mm に最も近い候補shotを強制計測shotにする。既定は中心と上下左右の十字配置（中心＋半径0.52〜0.66の4 shot）。"
+  },
+  "optimizer": {
+    "algorithm": "modified_fedorov",
+    "n_starts": 200,
+    "max_passes": 50,
+    "convergence_tolerance": 1E-9,
+    "ridge_epsilon": 1E-8,
+    "rank_tolerance": 1E-8,
+    "i_eval_set": "dense_grid",
+    "i_eval_grid_spacing_mm": 5,
+    "x_note": "n_starts（multi-start回数）と収束判定は仮定値。20回では制約付き設計で400回より最大約3%効率が低い場合があったため200回にした。D/Iで同じ初期解・同じ回数を使う。ridge_epsilon は探索中だけ情報行列に足す微小値（点数が足りない設計でも探索を進めるため）。最終判定は rank_tolerance で full rank を確認する。i_eval_set: dense_grid / all_valid_marks / candidate_marks。"
+  },
+  "soft_constraint_study": {
+    "enabled": true,
+    "howa_orders": [
+      3,
+      4,
+      5
+    ],
+    "n_shots": [
+      8,
+      12,
+      19
+    ],
+    "weights": [
+      0,
+      0.02,
+      0.05,
+      0.1,
+      0.2,
+      0.5,
+      1,
+      2,
+      5
+    ],
+    "x_note": "soft制約（はみ出し1 shotあたりの罰則 λ）の重みを変えた補助評価。λ=0 は制約なし。主評価は constraints.mode（既定 hard）で行う。"
+  },
+  "random_sampling": {
+    "n_draws": 200,
+    "max_redraws_per_draw": 1000,
+    "x_note": "Randomは毎回の抽選で結果が変わるため n_draws 回抽選する。rank不足の抽選はやり直し、回数を記録する。"
+  },
+  "poisson": {
+    "n_starts": 20,
+    "x_note": "候補shot中心に対する離散Poisson disk。最小距離は目標shot数になるよう自動調整し、複数の乱数初期値のうち最小距離が最大の解を代表解にする（残差は見ない）。"
+  },
+  "human": {
+    "csv_path": "",
+    "include_center": true,
+    "ring_radii_norm": [
+      0.45,
+      0.78
+    ],
+    "ring_weight": "circumference",
+    "angle_offset_deg": 45,
+    "x_note": "実際の人手配置がない場合のルールベース模擬（中心shot＋2つの同心円上に等角度配置→最寄りの候補shot）。csv_path を指定すると列 n_shots,shot_id のCSVを読み、その shot 数ではCSVの配置を使う。"
+  },
+  "zernike": {
+    "max_radial_order": 7,
+    "order_definition": "radial_degree",
+    "min_terms": 10,
+    "max_terms": 20,
+    "coefficient_distribution": "normal",
+    "sigma0_nm": 3,
+    "alpha": 1,
+    "xy_mode": "independent",
+    "xy_correlation": 0,
+    "normalization": {
+      "mode": "clip_range",
+      "target_rms_nm": 3,
+      "min_rms_nm": 1,
+      "max_rms_nm": 8
+    },
+    "x_note": "仮定値。Fringe Zernike（非正規化、ρ = r / ウェーハ半径）。order_definition: radial_degree（動径次数 n <= 7、36項）/ fringe_group（(n+|m|)/2 <= 7）。係数 a_k ~ N(0, sigma_k^2)、sigma_k = sigma0 / max(n,1)^alpha。distribution は normal / uniform。xy_mode: independent / correlated（同じ項を選び係数に相関 xy_correlation）。normalization.mode: none / target_rms / clip_range（RMSが[min,max]の外なら境界へ拡大縮小）。RMSは評価点（全有効mark）での値。"
+  },
+  "monte_carlo": {
+    "n_wafers": 1000
+  },
+  "scan_noise": {
+    "model_a": {
+      "enabled": true,
+      "amplitude_nm": [
+        0.3,
+        0.3
+      ],
+      "wafer_variation_fraction": 0.2,
+      "x_note": "仮定値。Up/Downで符号が反転するsystematic offset。Up: +a、Down: -a。a = amplitude * (1 + wafer_variation_fraction * N(0,1))。"
+    },
+    "model_b": {
+      "enabled": true,
+      "amplitude_nm": [
+        0.5,
+        0.5
+      ],
+      "terms": [
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "x_note": "仮定値。Up/Downで符号が反転する低次空間成分 s_d * Σ b_k u^i v^j。terms は [i, j] の指数。b_k ~ N(0, amplitude^2) をwaferごとに生成。"
+    },
+    "model_c": {
+      "enabled": true,
+      "sigma_up_nm": [
+        0.15,
+        0.15
+      ],
+      "sigma_down_nm": [
+        0.25,
+        0.25
+      ],
+      "x_note": "仮定値。scan方向ごとに標準偏差が異なるshot単位のランダム成分（同じshotの4 markは同じ値）。"
+    }
+  },
+  "mark_noise": {
+    "levels": {
+      "low": [
+        0.25,
+        0.25
+      ],
+      "nominal": [
+        0.5,
+        0.5
+      ],
+      "high": [
+        1,
+        1
+      ]
+    },
+    "x_note": "仮定値。markごとに独立な N(0, sigma^2)（[X, Y] の標準偏差 nm）。同じ標準正規乱数を各水準で拡大縮小して使う（共通乱数）。"
+  },
+  "conditions": [
+    {
+      "name": "nominal",
+      "mark_noise_level": "nominal",
+      "scan_scale": 1
+    },
+    {
+      "name": "noise_low",
+      "mark_noise_level": "low",
+      "scan_scale": 1
+    },
+    {
+      "name": "noise_high",
+      "mark_noise_level": "high",
+      "scan_scale": 1
+    },
+    {
+      "name": "scan_x0",
+      "mark_noise_level": "nominal",
+      "scan_scale": 0
+    },
+    {
+      "name": "scan_x0.5",
+      "mark_noise_level": "nominal",
+      "scan_scale": 0.5
+    },
+    {
+      "name": "scan_x2",
+      "mark_noise_level": "nominal",
+      "scan_scale": 2
+    },
+    {
+      "name": "scan_x4",
+      "mark_noise_level": "nominal",
+      "scan_scale": 4
+    }
+  ],
+  "x_note_conditions": "最初の条件を主評価（nominal）とする。scan_scale は scan方向依存成分（Model A+B+C）全体の倍率。",
+  "evaluation": {
+    "include_scan_in_truth": false,
+    "x_note": "残差 = 真の面内傾向（Zernike） - HOWA補正。評価点は全shot（partial shotを含む）のうちusable領域内にある全mark。include_scan_in_truth=true にすると真値にscan方向成分も含める。"
+  },
+  "statistics": {
+    "confidence_level": 0.95,
+    "bootstrap_samples": 2000,
+    "bootstrap_median_conditions": [
+      "nominal"
+    ],
+    "proposed_methods": {
+      "base": [
+        "cdopt",
+        "ciopt"
+      ],
+      "mandatory": [
+        "cdopt_aug",
+        "ciopt_aug"
+      ]
+    },
+    "reduction_reference_methods": [
+      "human",
+      "random",
+      "poisson"
+    ]
+  },
+  "appendix": {
+    "scenario": "base",
+    "howa_order": 4,
+    "n_shots": 12,
+    "proposed_method": "ciopt",
+    "comparator_methods": [
+      "random",
+      "poisson",
+      "human",
+      "dopt",
+      "iopt"
+    ],
+    "typical_quantile": 0.5,
+    "improvement_quantile": 0.9,
+    "x_note": "代表wafer 3例の選定ルール。Sample1: 全手法平均のRMSが中央値に最も近いwafer。Sample2: 比較手法に対する提案法の平均改善率が improvement_quantile 分位点に最も近いwafer。Sample3: 全手法中の最小RMSが最大のwafer（どの手法でも残差が大きい）。"
+  },
+  "figures": {
+    "map_n_shots": [
+      8,
+      12,
+      19
+    ],
+    "reference_n_shots": 12,
+    "dpi": 300,
+    "x_note": "map_n_shots: sampling mapを描くshot数。reference_n_shots: 分布図・頑健性の図で使うshot数。"
+  },
+  "parallel": {
+    "enabled": false,
+    "max_workers": 4,
+    "x_note": "trueかつParallel Computing Toolboxがあるとき、Monte Carlo評価をparforで実行する。"
+  },
+  "output": {
+    "wafer_csv_conditions": [
+      "nominal"
+    ],
+    "x_note": "waferごとのCSVを書き出す条件（全条件にすると数百MBになる）。"
+  },
+  "source_path": "config/default_config.json"
+}

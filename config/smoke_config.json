@@ -1,0 +1,19 @@
+{
+  "_about": "動作確認（smoke test）用の小規模設定。base_config の値を読み込んだうえで、ここに書いた項目だけを上書きする。",
+  "base_config": "default_config.json",
+  "study": {"name": "smoke_test", "output_dir": "results_smoke"},
+  "howa": {"orders": [3, 5]},
+  "sweep": {"mode": "adaptive", "step": 1, "adaptive_fine_until": 8, "adaptive_coarse_step": 5},
+  "optimizer": {"n_starts": 3},
+  "random_sampling": {"n_draws": 6},
+  "poisson": {"n_starts": 3},
+  "soft_constraint_study": {"howa_orders": [5], "n_shots": [8], "weights": [0, 0.5, 5]},
+  "monte_carlo": {"n_wafers": 40},
+  "conditions": [
+    {"name": "nominal",    "mark_noise_level": "nominal", "scan_scale": 1.0},
+    {"name": "noise_high", "mark_noise_level": "high",    "scan_scale": 1.0}
+  ],
+  "statistics": {"bootstrap_samples": 200},
+  "appendix": {"howa_order": 5, "n_shots": 8},
+  "figures": {"map_n_shots": [8], "reference_n_shots": 8}
+}

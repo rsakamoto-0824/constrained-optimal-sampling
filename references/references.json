@@ -1,0 +1,709 @@
+{
+ "_about": "技術報告書（report/technical_report.tex）で引用した参考文献の正本。確認日 2026-10-04。status: obtained = 正規の入手先から本文を取得して内容を確認 / existing = 既にZoteroと手元の論文ライブラリにあり本文を確認済み / not_obtained = 本文を取得できず（理由は reason）、書誌はCrossref等で確認。本文ファイルは references/sources/（gitの対象外）。",
+ "case_collection": "2026-10-04_制約付き最適サンプリング評価",
+ "references": [
+  {
+   "key": "wang2009",
+   "status": "not_obtained",
+   "reason": "SPIE Digital Library の有料論文（購読なし）",
+   "itemType": "conferencePaper",
+   "title": "Overlay improvement by ASML HOWA 5th alignment strategy",
+   "authors": [
+    "Wang, Raf",
+    "Chiang, CY",
+    "Hsu, Wilson",
+    "Yang, Richer",
+    "Shih, Todd",
+    "Chen, Jackie",
+    "Chiu, Jonathan",
+    "Lin, Wythe"
+   ],
+   "affiliation": "Inotera Memories / ASML Taiwan",
+   "year": 2009,
+   "venue": "Proc. SPIE 7520 (Lithography Asia 2009)",
+   "pages": "752023",
+   "doi": "10.1117/12.839816",
+   "url": "https://doi.org/10.1117/12.839816",
+   "used_for": "HOWA 5次までのアライメントモデルの実適用例（2.2節）"
+  },
+  {
+   "key": "pike2012",
+   "status": "not_obtained",
+   "reason": "SPIE Digital Library の有料論文（購読なし）",
+   "itemType": "conferencePaper",
+   "title": "High-order wafer alignment in manufacturing",
+   "authors": [
+    "Pike, Michael",
+    "Felix, Nelson",
+    "Menon, Vinayan",
+    "Ausschnitt, Christopher",
+    "Wiltshire, Timothy",
+    "Meyers, Sheldon",
+    "Kim, Won",
+    "Minghetti, Blandine"
+   ],
+   "affiliation": "IBM / GLOBALFOUNDRIES / ASML US",
+   "year": 2012,
+   "venue": "Proc. SPIE 8324",
+   "pages": "832408",
+   "doi": "10.1117/12.916483",
+   "url": "https://doi.org/10.1117/12.916483",
+   "used_for": "量産でのHOWA適用（計測mark数の増加とwaferごとの補正）（2.2節）"
+  },
+  {
+   "key": "jeon2013",
+   "status": "not_obtained",
+   "reason": "SPIE Digital Library の有料論文（購読なし）",
+   "itemType": "conferencePaper",
+   "title": "High order wafer alignment for 20nm node logic process",
+   "authors": [
+    "Jeon, Bumhwan",
+    "Pal, Shyam",
+    "Mehta, Sohan",
+    "Lokesh, Subramany",
+    "Jiang, Yun Tao",
+    "Li, Chen",
+    "Yelverton, Mark",
+    "Wei, Yayi"
+   ],
+   "year": 2013,
+   "venue": "Proc. SPIE 8681",
+   "pages": "868110",
+   "doi": "10.1117/12.2010709",
+   "url": "https://doi.org/10.1117/12.2010709",
+   "used_for": "ロジック工程へのHOWA適用例（2.2節）"
+  },
+  {
+   "key": "us9291916",
+   "status": "obtained",
+   "file": "sources/2016_ASML_US9291916B2 Method of applying a pattern to a substrate (HOWA).pdf",
+   "itemType": "patent",
+   "title": "Method of applying a pattern to a substrate, device manufacturing method and lithographic apparatus for use in such methods",
+   "authors": [
+    "Van Der Sanden, Stefan Cornelis Theodorus",
+    "Van Haren, Richard Johannes Franciscus",
+    "Simons, Hubertus Johannes Gertrudus",
+    "Edart, Remi Daniel Marie",
+    "Wei, Xiuhong",
+    "Lyulina, Irina",
+    "Kubis, Michael"
+   ],
+   "assignee": "ASML Netherlands B.V.",
+   "year": 2016,
+   "number": "US9291916B2",
+   "date": "2016-03-22",
+   "url": "https://patents.google.com/patent/US9291916B2/en",
+   "used_for": "HOWAは3次以上の多項式に基づく公開手法であること、HOWA・RBFは数十のパラメータを持ち多くの計測が必要なこと（2.2節）"
+  },
+  {
+   "key": "chue2009",
+   "status": "existing",
+   "reason": "SPIE Digital Library の有料論文（購読なし）",
+   "itemType": "conferencePaper",
+   "title": "Optimization of alignment/overlay sampling and marker layout to improve overlay performance for double patterning technology",
+   "authors": [
+    "Chue, Chuei-Fu",
+    "Chiou, Tsann-Bim",
+    "Huang, Chun-Yen",
+    "Chen, Alek C.",
+    "Shih, Chiang-Lin"
+   ],
+   "affiliation": "Nanya Technology / ASML TDC Asia",
+   "year": 2009,
+   "venue": "Proc. SPIE 7520 (Lithography Asia 2009)",
+   "pages": "75200G",
+   "doi": "10.1117/12.837137",
+   "url": "https://doi.org/10.1117/12.837137",
+   "used_for": "アライメント・overlayのsamplingとmark配置の最適化（2.3・2.4節）",
+   "note": "2026-10-03 のアライメント OVL サンプリング最適化調査で Zotero 登録済み（本文確認済み）"
+  },
+  {
+   "key": "koay2010",
+   "status": "not_obtained",
+   "reason": "SPIE Digital Library の有料論文（購読なし）",
+   "itemType": "conferencePaper",
+   "title": "Automated optimized overlay sampling for high-order processing in double patterning lithography",
+   "authors": [
+    "Koay, Chiew-seng",
+    "Colburn, Matthew E.",
+    "Izikson, Pavel",
+    "Robinson, John C.",
+    "Kato, Cindy",
+    "Kurita, Hiroyuki",
+    "Nagaswami, Venkat"
+   ],
+   "year": 2010,
+   "venue": "Proc. SPIE 7638",
+   "pages": "76381R",
+   "doi": "10.1117/12.846371",
+   "url": "https://doi.org/10.1117/12.846371",
+   "used_for": "KT-Analyzer による高次補正向けoverlay samplingの自動最適化（2.4節）"
+  },
+  {
+   "key": "chiu2022a",
+   "status": "not_obtained",
+   "reason": "SPIE Digital Library の有料論文（購読なし）",
+   "itemType": "conferencePaper",
+   "title": "A comprehensive study of scanner alignment mark quantity and layout-dependent effect for overlay performance optimization",
+   "authors": [
+    "Chiu, Chieh-Chen",
+    "Tian, Feng",
+    "Feng, Wei",
+    "Gao, Mingqi",
+    "Lan, Andy",
+    "Zhong, Shengyuan",
+    "Tsou, Chaojen",
+    "Zhu, Ningqi",
+    "Zhu, Jin",
+    "Pei, Jincheng",
+    "Huang, Kevin"
+   ],
+   "year": 2022,
+   "venue": "Proc. SPIE 12053",
+   "pages": "1205319",
+   "doi": "10.1117/12.2614375",
+   "url": "https://doi.org/10.1117/12.2614375",
+   "used_for": "HOWAモデルのアライメントmark数と配置の共最適化（2.3節）"
+  },
+  {
+   "key": "chiu2022b",
+   "status": "not_obtained",
+   "reason": "SPIE Digital Library の有料論文（購読なし）",
+   "itemType": "conferencePaper",
+   "title": "A new development algorithm to optimize scanner alignment sampling for cross-chuck overlay performance optimization",
+   "authors": [
+    "Chiu, Chieh-Chen",
+    "Tian, Feng",
+    "Feng, Wei",
+    "Gao, Mingqi",
+    "Lan, Andy",
+    "Tsou, Chao-jen",
+    "Zhong, Shengyuan",
+    "Birnstein, Norman",
+    "Zech, Robin Maximilian",
+    "Utzny, Clemens",
+    "Zhu, Jin",
+    "Pei, Jincheng",
+    "Huang, Kevin"
+   ],
+   "year": 2022,
+   "venue": "Proc. SPIE 12053",
+   "doi": "10.1117/12.2627283",
+   "url": "https://doi.org/10.1117/12.2627283",
+   "used_for": "スキャナーのアライメントsampling最適化アルゴリズム（2.4節）"
+  },
+  {
+   "key": "us7197722",
+   "status": "obtained",
+   "file": "sources/2007_Intel_US7197722B2 Optimization of sample plan for overlay.pdf",
+   "itemType": "patent",
+   "title": "Optimization of sample plan for overlay",
+   "authors": [
+    "Wong, Alan",
+    "Drautz, Jeff",
+    "Shindler, Joseph D.",
+    "Lau, Max",
+    "Chen, George"
+   ],
+   "assignee": "Intel Corporation",
+   "year": 2007,
+   "number": "US7197722B2",
+   "date": "2007-03-27",
+   "url": "https://patents.google.com/patent/US7197722B2/en",
+   "used_for": "D/A/V最適計画とMonte Carloによるoverlay sample planの最適化（2.4節）"
+  },
+  {
+   "key": "us7571420",
+   "status": "obtained",
+   "file": "sources/2009_Intel_US7571420B2 Dynamic sampling with efficient model for overlay.pdf",
+   "itemType": "patent",
+   "title": "Dynamic sampling with efficient model for overlay",
+   "authors": [
+    "Wong, Alan",
+    "Drautz, Jeff",
+    "Shindler, Joseph D.",
+    "Lau, Max",
+    "Chen, George"
+   ],
+   "assignee": "Intel Corporation",
+   "year": 2009,
+   "number": "US7571420B2",
+   "date": "2009-08-04",
+   "url": "https://patents.google.com/patent/US7571420B2/en",
+   "used_for": "冗長・高相関なモデル項の削除と動的sampling（2.4節）"
+  },
+  {
+   "key": "us7042552",
+   "status": "obtained",
+   "file": "sources/2006_ASML_US7042552B1 Alignment strategy optimization method.pdf",
+   "itemType": "patent",
+   "title": "Alignment strategy optimization method",
+   "authors": [
+    "Werkman, Roy",
+    "Van Bilsen, Franciscus Bernardus Maria",
+    "Swinnen, Bart"
+   ],
+   "assignee": "ASML Netherlands B.V.",
+   "year": 2006,
+   "number": "US7042552B1",
+   "date": "2006-05-09",
+   "url": "https://patents.google.com/patent/US7042552B1/en",
+   "used_for": "mark数・位置を含むアライメント戦略をoverlay指標で選ぶ方法（2.4節）"
+  },
+  {
+   "key": "wo2020234028",
+   "status": "existing",
+   "file": "sources/2020_ASML_WO2020234028A1 Method for determining a sampling scheme.pdf",
+   "itemType": "patent",
+   "title": "Method for determining a sampling scheme, a semiconductor substrate measurement apparatus, a lithographic apparatus",
+   "authors": [
+    "Smorenberg, Pieter Gerardus Jacobus",
+    "Saputra, Putra",
+    "Elbattay, Khalid",
+    "Derwin, Paul",
+    "Werkman, Roy",
+    "Jensen, Erik",
+    "Yu, Hyun-Woo",
+    "Sarma, Gautam"
+   ],
+   "assignee": "ASML Netherlands B.V.",
+   "year": 2020,
+   "number": "WO2020234028A1",
+   "date": "2020-11-26",
+   "url": "https://patents.google.com/patent/WO2020234028A1/en",
+   "used_for": "予測不確かさ（正規化モデル不確かさ・G最適性など）に基づくsampling点の決定（2.4節）",
+   "note": "2026-10-03 のアライメント OVL サンプリング最適化調査で Zotero 登録済み（本文確認済み）"
+  },
+  {
+   "key": "us11775728",
+   "status": "obtained",
+   "file": "sources/2023_ASML_US11775728B2 Methods for sample scheme generation and optimization.pdf",
+   "itemType": "patent",
+   "title": "Methods for sample scheme generation and optimization",
+   "authors": [
+    "Frisco, Pierluigi"
+   ],
+   "assignee": "ASML Netherlands B.V.",
+   "year": 2023,
+   "number": "US11775728B2",
+   "date": "2023-10-03",
+   "url": "https://patents.google.com/patent/US11775728B2/en",
+   "used_for": "多目的遺伝的アルゴリズムによるmark数とKPIのトレードオフ最適化、制約の扱い（2.4節）"
+  },
+  {
+   "key": "slonaker1988",
+   "status": "existing",
+   "itemType": "conferencePaper",
+   "title": "Enhanced global alignment for production optical lithography",
+   "authors": [
+    "Slonaker, Steve",
+    "McNamara, Sean",
+    "Konno, Kunio",
+    "Miller, Ron",
+    "Magome, Nobutaka",
+    "Umatate, Toshikazu",
+    "Tateno, Hiroki",
+    "Lin, Burn J."
+   ],
+   "year": 1988,
+   "venue": "Proc. SPIE 922 (Optical/Laser Microlithography)",
+   "doi": "10.1117/12.968404",
+   "url": "https://doi.org/10.1117/12.968404",
+   "used_for": "選んだsample shotの計測から全shotの配列を求めるEGA（2.1節）",
+   "pages": "73-81"
+  },
+  {
+   "key": "us5493402",
+   "status": "existing",
+   "itemType": "patent",
+   "title": "EGA alignment method using a plurality of weighting coefficients",
+   "assignee": "Nikon Corporation",
+   "year": 1996,
+   "number": "US5493402A",
+   "url": "https://patents.google.com/patent/US5493402A/en",
+   "used_for": "sample shotに距離に応じた重みを付けるEGA（2.4節）"
+  },
+  {
+   "key": "nikon_litho_booster",
+   "status": "existing",
+   "file": "sources/web/2026_Nikon_Litho Booster product page.html",
+   "itemType": "webpage",
+   "title": "Litho Booster Standalone Alignment Station",
+   "authors": [
+    "Nikon Precision Inc."
+   ],
+   "year": 2026,
+   "url": "https://www.nikonprecision.com/products-and-technology/alignment-stations/litho-booster/",
+   "accessed": "2026-10-04",
+   "used_for": "露光前に全面のalignment markを密に計測して高次補正をfeed forwardする装置（最大626点の例）（2.4節）",
+   "note": "2026-10-03 のアライメント OVL サンプリング最適化調査で Zotero 登録済み（本文確認済み）"
+  },
+  {
+   "key": "canon_ms001",
+   "status": "obtained",
+   "file": "sources/web/2023_Canon_MS-001 wafer measurement equipment news.html",
+   "itemType": "webpage",
+   "title": "New Canon wafer measurement equipment improves productivity of lithography systems, enabling high-precision alignment for increasingly complex semiconductor manufacturing processes",
+   "authors": [
+    "Canon Inc."
+   ],
+   "year": 2023,
+   "date": "2023-02-21",
+   "url": "https://global.canon/en/news/2023/20230221.html",
+   "accessed": "2026-10-04",
+   "used_for": "alignment markの計測点が数百点に増えたことと、露光機外での計測（2.4節）"
+  },
+  {
+   "key": "adel2007",
+   "status": "existing",
+   "itemType": "conferencePaper",
+   "title": "The challenges of transitioning from linear to high-order overlay control in advanced lithography",
+   "authors": [
+    "Adel, M.",
+    "Izikson, P.",
+    "Tien, D.",
+    "Huang, C. K.",
+    "Robinson, J. C.",
+    "Eichelberger, B."
+   ],
+   "year": 2007,
+   "venue": "Proc. SPIE 6827",
+   "pages": "682722",
+   "doi": "10.1117/12.778457",
+   "url": "https://doi.org/10.1117/12.778457",
+   "used_for": "線形から高次補正への移行と計測点数の課題（1.2節）"
+  },
+  {
+   "key": "chiu2012",
+   "status": "existing",
+   "itemType": "conferencePaper",
+   "title": "Impacts of overlay correction model and metrology sampling scheme on device yield",
+   "authors": [
+    "Chiu, Chui-Fu",
+    "Huang, Chun-Yen",
+    "Shieh, Jason",
+    "Chiou, Tsann-Bim",
+    "Li, Albert",
+    "Shih, Chiang-Lin",
+    "Chen, Alek"
+   ],
+   "year": 2012,
+   "venue": "Proc. SPIE 8324",
+   "pages": "83241S",
+   "doi": "10.1117/12.916601",
+   "url": "https://doi.org/10.1117/12.916601",
+   "used_for": "補正モデルと計測sampling schemeが歩留まりに与える影響（1.3節）",
+   "affiliation": "Nanya Technology / ASML"
+  },
+  {
+   "key": "fedorov1972",
+   "status": "not_obtained",
+   "reason": "書籍（購入が必要）",
+   "itemType": "book",
+   "title": "Theory of Optimal Experiments",
+   "authors": [
+    "Fedorov, V. V."
+   ],
+   "year": 1972,
+   "publisher": "Academic Press",
+   "used_for": "最適計画とFedorov交換法（2.5節・3.10節）"
+  },
+  {
+   "key": "mitchell1974",
+   "status": "not_obtained",
+   "reason": "Taylor & Francis（Technometrics）の有料論文",
+   "itemType": "journalArticle",
+   "title": "An algorithm for the construction of \"D-optimal\" experimental designs",
+   "authors": [
+    "Mitchell, Toby J."
+   ],
+   "year": 1974,
+   "venue": "Technometrics 16(2)",
+   "pages": "203-210",
+   "doi": "10.1080/00401706.1974.10489175",
+   "url": "https://doi.org/10.1080/00401706.1974.10489175",
+   "used_for": "DETMAX（3.10節）"
+  },
+  {
+   "key": "cook1980",
+   "status": "not_obtained",
+   "reason": "Taylor & Francis（Technometrics）の有料論文",
+   "itemType": "journalArticle",
+   "title": "A comparison of algorithms for constructing exact D-optimal designs",
+   "authors": [
+    "Cook, R. Dennis",
+    "Nachtsheim, Christopher J."
+   ],
+   "year": 1980,
+   "venue": "Technometrics 22(3)",
+   "pages": "315-324",
+   "doi": "10.1080/00401706.1980.10486162",
+   "url": "https://doi.org/10.1080/00401706.1980.10486162",
+   "used_for": "modified Fedorov交換法（3.10節）"
+  },
+  {
+   "key": "dykstra1971",
+   "status": "not_obtained",
+   "reason": "Taylor & Francis（Technometrics）の有料論文",
+   "itemType": "journalArticle",
+   "title": "The augmentation of experimental data to maximize |X'X|",
+   "authors": [
+    "Dykstra, Otto"
+   ],
+   "year": 1971,
+   "venue": "Technometrics 13(3)",
+   "pages": "682-688",
+   "doi": "10.1080/00401706.1971.10488830",
+   "url": "https://doi.org/10.1080/00401706.1971.10488830",
+   "used_for": "既存データを考慮したD最適な追加点（拡張実験計画）（3.9節）"
+  },
+  {
+   "key": "meyer1995",
+   "status": "not_obtained",
+   "reason": "Taylor & Francis（Technometrics）の有料論文",
+   "itemType": "journalArticle",
+   "title": "The coordinate-exchange algorithm for constructing exact optimal experimental designs",
+   "authors": [
+    "Meyer, Ruth K.",
+    "Nachtsheim, Christopher J."
+   ],
+   "year": 1995,
+   "venue": "Technometrics 37(1)",
+   "pages": "60-69",
+   "doi": "10.1080/00401706.1995.10485889",
+   "url": "https://doi.org/10.1080/00401706.1995.10485889",
+   "used_for": "交換アルゴリズムの選択肢（3.10節）"
+  },
+  {
+   "key": "atkinson2007",
+   "status": "not_obtained",
+   "reason": "書籍（購入が必要）",
+   "itemType": "book",
+   "title": "Optimum Experimental Designs, with SAS",
+   "authors": [
+    "Atkinson, A. C.",
+    "Donev, A. N.",
+    "Tobias, R. D."
+   ],
+   "year": 2007,
+   "publisher": "Oxford University Press",
+   "used_for": "D・I（V）最適基準と効率の定義（2.5節・7.3〜7.4節）"
+  },
+  {
+   "key": "goos2011",
+   "status": "not_obtained",
+   "reason": "書籍（購入が必要）",
+   "itemType": "book",
+   "title": "Optimal Design of Experiments: A Case Study Approach",
+   "authors": [
+    "Goos, Peter",
+    "Jones, Bradley"
+   ],
+   "year": 2011,
+   "publisher": "Wiley",
+   "used_for": "I最適計画（2.5節）"
+  },
+  {
+   "key": "jones2012",
+   "status": "not_obtained",
+   "reason": "Taylor & Francis（Journal of Quality Technology）の有料論文",
+   "itemType": "journalArticle",
+   "title": "I-optimal versus D-optimal split-plot response surface designs",
+   "authors": [
+    "Jones, Bradley",
+    "Goos, Peter"
+   ],
+   "year": 2012,
+   "venue": "Journal of Quality Technology 44(2)",
+   "pages": "85-101",
+   "doi": "10.1080/00224065.2012.11917886",
+   "url": "https://doi.org/10.1080/00224065.2012.11917886",
+   "used_for": "予測目的ではI最適が有利になりうること（2.5節・9.2節）"
+  },
+  {
+   "key": "wyant1992",
+   "status": "obtained",
+   "file": "sources/1992_Arizona_Wyant Creath Basic wavefront aberration theory for optical metrology.pdf",
+   "itemType": "bookSection",
+   "title": "Basic wavefront aberration theory for optical metrology",
+   "authors": [
+    "Wyant, James C.",
+    "Creath, Katherine"
+   ],
+   "year": 1992,
+   "venue": "Applied Optics and Optical Engineering, Vol. XI (Academic Press)",
+   "pages": "1-53",
+   "url": "https://wp.optics.arizona.edu/jcwyant/wp-content/uploads/sites/13/2016/08/03-BasicAberrations_and_Optical_Testing.pdf",
+   "used_for": "Fringe Zernike多項式の定義（36項＋定数項の表）（5.1節）"
+  },
+  {
+   "key": "bridson2007",
+   "status": "obtained",
+   "file": "sources/2007_UBC_Bridson Fast Poisson disk sampling in arbitrary dimensions.pdf",
+   "itemType": "conferencePaper",
+   "title": "Fast Poisson disk sampling in arbitrary dimensions",
+   "authors": [
+    "Bridson, Robert"
+   ],
+   "year": 2007,
+   "venue": "ACM SIGGRAPH 2007 Sketches",
+   "pages": "22",
+   "doi": "10.1145/1278780.1278807",
+   "url": "https://www.cs.ubc.ca/~rbridson/docs/bridson-siggraph07-poissondisk.pdf",
+   "used_for": "Poisson disk sampling（dart throwing）（4.3節）"
+  },
+  {
+   "key": "efron1993",
+   "status": "not_obtained",
+   "reason": "書籍（購入が必要）",
+   "itemType": "book",
+   "title": "An Introduction to the Bootstrap",
+   "authors": [
+    "Efron, Bradley",
+    "Tibshirani, Robert J."
+   ],
+   "year": 1993,
+   "publisher": "Chapman & Hall",
+   "used_for": "bootstrap信頼区間（7章・8章）"
+  },
+  {
+   "key": "us20160334717",
+   "status": "existing",
+   "itemType": "patent",
+   "title": "Method of determining a measurement subset of metrology points on a substrate, associated apparatus and computer program",
+   "authors": [
+    "Jochem Sebastiaan Wildenberg",
+    "Everhardus Cornelis Mos"
+   ],
+   "company": "ASML",
+   "year": 2016,
+   "url": "https://patents.google.com/patent/US20160334717A1/en",
+   "used_for": "情報量（D最適性）が最大の点を逐次追加し，選択済み点の周囲をexclusion zoneとして除外して空間的な均一性と両立させる（2.4節・2.6節）",
+   "note": "2026-10-03 のアライメント OVL サンプリング最適化調査（Codex）で本文取得・Zotero登録済み。本報告では同調査の取得本文で該当箇所を再確認した"
+  },
+  {
+   "key": "us20160299438",
+   "status": "existing",
+   "itemType": "patent",
+   "title": "Method and apparatus for inspection and metrology",
+   "authors": [
+    "Everhardus Cornelis Mos",
+    "Erik Mathijs Maria Crombag",
+    "Ajith Ganesan"
+   ],
+   "company": "ASML",
+   "year": 2016,
+   "url": "https://patents.google.com/patent/US20160299438A1/en",
+   "used_for": "D最適・exclusion zoneに，計測時間，非良品dieの除外，中心/端の配分などの制約を加えるsample scheme optimizer（2.4節・2.6節）",
+   "note": "2026-10-03 のアライメント OVL サンプリング最適化調査（Codex）で本文取得・Zotero登録済み。本報告では同調査の取得本文で該当箇所を再確認した"
+  },
+  {
+   "key": "us10692227",
+   "status": "existing",
+   "itemType": "patent",
+   "title": "Determination of sampling maps for alignment measurements based on reduction of out of specification points",
+   "authors": [
+    "Brent A. Riggs",
+    "Onur N. Demirer",
+    "William Pierson"
+   ],
+   "company": "KLA",
+   "year": 2020,
+   "url": "https://patents.google.com/patent/US10692227B2/en",
+   "used_for": "dense参照から再構成誤差が許容差を超える点数を最小にするalignment sampling map（2.4節）",
+   "note": "2026-10-03 のアライメント OVL サンプリング最適化調査（Codex）で本文取得・Zotero登録済み。本報告では同調査の取得本文で該当箇所を再確認した"
+  },
+  {
+   "key": "us4918320",
+   "status": "existing",
+   "itemType": "patent",
+   "title": "Alignment method usable in a step-and-repeat type exposure apparatus for either global or dye-by-dye alignment",
+   "authors": [
+    "Bunei Hamasaki",
+    "Hajime Igarashi",
+    "Akiya Nakai",
+    "Naoki Ayata"
+   ],
+   "company": "Canon",
+   "year": 1990,
+   "url": "https://patents.google.com/patent/US4918320A/en",
+   "used_for": "中心対称と広がりで低次global alignmentの推定分散を抑えるsample shot選択（2.4節）",
+   "note": "2026-10-03 のアライメント OVL サンプリング最適化調査（Codex）で本文取得・Zotero登録済み。本報告では同調査の取得本文で該当箇所を再確認した"
+  },
+  {
+   "key": "us12025924",
+   "status": "existing",
+   "itemType": "patent",
+   "title": "Method of determining set of sample shot regions, method of obtaining measurement value, information processing apparatus, lithography apparatus, storage medium, and article manufacturing method",
+   "authors": [
+    "Shinichi Egashira"
+   ],
+   "company": "Canon",
+   "year": 2024,
+   "url": "https://patents.google.com/patent/US12025924B2/en",
+   "used_for": "学習データから未計測shotの推定分散を求め，最大分散のshotを逐次追加するsample shot選択（2.4節）",
+   "note": "2026-10-03 のアライメント OVL サンプリング最適化調査（Codex）で本文取得・Zotero登録済み。本報告では同調査の取得本文で該当箇所を再確認した"
+  },
+  {
+   "key": "jph1019512",
+   "status": "existing",
+   "itemType": "patent",
+   "title": "Positioning method",
+   "authors": [
+    "Kenji Hizuka"
+   ],
+   "company": "Nikon",
+   "year": 1998,
+   "url": "https://patents.google.com/patent/JPH1019512A/en",
+   "used_for": "円に内接する正多角形の頂点に近いshotを候補にし，markが計測可能かで置換する（2.4節，Human配置の参考）",
+   "note": "2026-10-03 のアライメント OVL サンプリング最適化調査（Codex）で本文取得・Zotero登録済み。本報告では同調査の取得本文で該当箇所を再確認した"
+  },
+  {
+   "key": "felix2011",
+   "status": "existing",
+   "itemType": "conferencePaper",
+   "title": "Overlay improvement roadmap: Strategies for scanner control and product disposition for 5-nm overlay",
+   "authors": [
+    "Nelson M. Felix",
+    "Allen H. Gabor",
+    "Vinayan C. Menon",
+    "Peter P. Longo",
+    "Scott D. Halle",
+    "Chiew-Seng Koay",
+    "Matthew E. Colburn"
+   ],
+   "company": "IBM",
+   "year": 2011,
+   "url": "https://research.ibm.com/publications/overlay-improvement-roadmap-strategies-for-scanner-control-and-product-disposition-for-5-nm-overlay",
+   "used_for": "scan方向の比率とwafer面内の空間配置に比例するようにOVL計測fieldを選ぶ最適化（2.4節・2.6節）",
+   "note": "2026-10-03 のアライメント OVL サンプリング最適化調査（Codex）で本文取得・Zotero登録済み。本報告では同調査の取得本文で該当箇所を再確認した",
+   "doi": "10.1117/12.879532"
+  },
+  {
+   "key": "lee2016",
+   "status": "existing",
+   "itemType": "conferencePaper",
+   "title": "In-depth analysis of sampling optimization methods",
+   "authors": [
+    "Honggoo Lee",
+    "Sangjun Han",
+    "Myoungsoo Kim",
+    "Boris Habets",
+    "Stefan Buhl",
+    "Steffen Guhlemann",
+    "Martin Rößiger",
+    "Enrico Bellmann",
+    "Seop Kim"
+   ],
+   "company": [
+    "SK Hynix",
+    "Qoniac"
+   ],
+   "year": 2016,
+   "url": "https://doi.org/10.1117/12.2219037",
+   "used_for": "幾何に基づく方法とdense dataに基づく方法のsampling最適化比較（2.4節）",
+   "note": "2026-10-03 のアライメント OVL サンプリング最適化調査（Codex）で本文取得・Zotero登録済み。本報告では同調査の取得本文で該当箇所を再確認した",
+   "doi": "10.1117/12.2219037"
+  }
+ ]
+}
