@@ -9,6 +9,7 @@ D 最適 / I 最適に選ぶ方法**を MATLAB で実装し、1000 枚の模擬 
 - 評価: HOWA 補正後の残差（真の面内傾向 − 推定補正）の RMS・P95・P99・Max、D/I-efficiency、
   coverage（B_Q・B_R・B_S）、制約違反、paired comparison（bootstrap 信頼区間）、必要 shot 数の削減率
 - 技術報告書: `report/technical_report.tex`（Overleaf の LuaLaTeX でそのままコンパイルできる単独ファイル）
+- 説明資料: `docs/constrained-sampling-results-briefing.pptx`（24枚。生成元は `docs/results-briefing_src/`）
 
 ## フォルダ構成
 
@@ -36,6 +37,7 @@ constrained-optimal-sampling/
 ├── tools/           check_multistart.m（multi-start 回数が足りているかの確認）
 ├── results/         本計算の出力（csv/ は登録、figures/ と study_results.mat は再生成）
 ├── report/          technical_report.tex と figures/（報告書で使う図）
+├── docs/            結果の説明資料（PPTX は再生成。生成元は results-briefing_src/）
 └── references/      references.json（参考文献の正本）と zotero/（Zotero 取り込み一式）
 ```
 
@@ -123,6 +125,11 @@ HOWA 次数ごとに、`4 × N ≥ p` を満たす最小の N から 1 shot ず�
 - 表の数値は `python3 tools/make_report_tables.py` が `results/csv` から作る `report/generated_tables.tex` を転記したものです（本文中の数値もこの出力と CSV で確認できます）
 - 参考文献リストは `python3 tools/make_bibliography.py` が `references/references.json` から作る `report/generated_bibliography.tex` を転記したものです
 - 図は `results/figures/` から報告書で使う分を `report/figures/` にコピーしています。再計算したらコピーし直してください
+
+## 説明資料の更新（docs/）
+
+- 実験結果を説明する PowerPoint は `docs/results-briefing_src/` のスクリプトで作ります。手順は同フォルダの README を参照してください
+- 数値は `results/csv` から自動で取り出します。PPTX はバイナリのため Git に登録していません
 
 ## 参考文献（references/）
 

@@ -29,3 +29,7 @@ report/*.synctex.gz
 report/*.fls
 report/*.fdb_latexmk
 report/*.pdf
+
+# 説明資料のPPTX（バイナリ。正本は docs/results-briefing_src の生成元）
+docs/*.pptx
+docs/results-briefing_src/*.pptx
