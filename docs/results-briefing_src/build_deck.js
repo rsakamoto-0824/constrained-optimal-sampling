@@ -84,9 +84,11 @@ const redPctAll = [...red12.map((n) => reductionPct(12, n)), ...red19.map((n) =>
 const augRows = (o) => D.aug[String(o)];
 const augMaxImp = Math.max(...[3, 4, 5].flatMap((o) => augRows(o).flatMap((r) => [r.cd, r.ci]).filter((v) => v !== null)));
 const softD = D.soft.filter((r) => r.crit === 'D');
-const augN11 = [3, 4, 5].map((o) => augRows(o).find((r) => r.n === 11).cd);   // 11 shot は全次数で Naive の方が有意に良い
+const augN11 = [3, 4, 5].map((o) => augRows(o).find((r) => r.n === 11).cd);   // 制約付きD基準の 11 shot は全次数で Naive の方が有意に良い
+const augN11I = [3, 4, 5].map((o) => augRows(o).find((r) => r.n === 11).ci);  // 制約付きI基準の 11 shot は拡張計画の方が良い
 const augN11Worse = [3, 4, 5].every((o) => augRows(o).find((r) => r.n === 11).cd_worse);
-if (!augN11Worse) throw new Error('11 shot で Naive が有意に良いという記述が deck_data.json と合わない。結果⑧の文章を見直すこと');
+const augN11IBetter = [3, 4, 5].every((o) => augRows(o).find((r) => r.n === 11).ci_sig);
+if (!augN11Worse || !augN11IBetter) throw new Error('11 shot の逆転（D基準はNaiveが有意に良く、I基準は拡張計画が有意に良い）の記述が deck_data.json と合わない。結果⑧の文章を見直すこと');
 const augLate = [3, 4, 5].flatMap((o) => augRows(o).filter((r) => r.n >= 13).map((r) => Math.abs(r.cd)));
 
 // ---- プレゼンテーション ----
@@ -804,8 +806,9 @@ function addLegendBox(slide, x, y, items, labelW = 4.0) {
     '強制計測shot（中心と上下左右の5 shot）を必ず含める条件で、強制shotの情報量を考慮して残りを選ぶ拡張計画と、考慮せずに選んで後から足す素朴な方法（Naive）を比べました。',
     `拡張計画の残差は、追加shotが少ないほどNaiveより小さく、5次では9 shotで${fmt1(augRows(5).find((r) => r.n === 9).cd)}%、12 shotで${fmt1(augRows(5).find((r) => r.n === 12).cd)}%小さくなりました（制約付きD基準）。`,
     'Naiveは4次・5次の7 shot（追加2 shot）で設計がrank不足になり、補正係数を推定できませんでした。拡張計画は全shot数で推定できました。',
-    `一方、11 shotでは全次数でNaiveの方が有意に小さくなりました（${augN11.map((v) => fmt1(-v)).join('・')}%、3・4・5次）。13 shot以上の差は${Math.ceil(Math.max(...augLate))}%以内で、Naiveが有意に良い点もあります。報告書の本文ではこの11 shotの逆転に触れていないので、補足が必要です。`,
-    '強制shotの割合が大きい（追加shotが少ない）ほど、拡張計画を使う意味が大きくなります。逆転は交換法の局所解による揺れと考えられますが、原因は確認していません。',
+    `一方、制約付きD基準の11 shotでは、全次数でNaiveの方が有意に小さくなりました（${augN11.map((v) => fmt1(-v)).join('・')}%、3・4・5次）。制約付きI基準の11 shotでは拡張計画の方が小さい結果でした（${augN11I.map((v) => fmt1(v)).join('・')}%）。`,
+    'D基準の拡張計画は11 shotでも情報量（D-efficiency）はNaiveより大きいのですが、4次・5次では平均予測分散（I-efficiency）が逆に悪く、これが主な理由と考えられます。最良値に届いた初期解は半数を超えており、探索不足ではありません。3次の理由は確認していません。報告書8.9節にも記載しています。',
+    `13 shot以上の差は${Math.ceil(Math.max(...augLate))}%以内で、Naiveが有意に良い点もあります。強制shotの割合が大きい（追加shotが少ない）ほど、拡張計画を使う意味が大きくなります。`,
   ]);
   const ns = augRows(5).map((r) => String(r.n));
   const data = [3, 4, 5].map((o) => ({ name: `${o}次`, labels: ns, values: augRows(o).map((r) => (r.cd === null ? null : r.cd)) }));
@@ -826,7 +829,7 @@ function addLegendBox(slide, x, y, items, labelW = 4.0) {
   addTableBox(slide, rows, 8.7, 2.2, 3.85, [0.8, 1.3, 1.75], { rowH: 0.42, fontSize: 11.5 });
   addText(slide, '平均RMS [nm]、制約付きD最適。強制shotが計測の大半を占める少shot側では、外周を測る余地がなくなり残差が増える。19 shotではほぼ差がない', 8.7, 4.4, 3.85, 0.85, { fontSize: 11, color: C.muted });
   addCard(slide, 8.5, 5.55, 4.23, 1.2, { fill: C.badTint });
-  addText(slide, `注意：11 shotでは全次数でNaiveの方が有意に小さい（${fmt1(-Math.max(...augN11))}〜${fmt1(-Math.min(...augN11))}%）。13 shot以上の差は${Math.ceil(Math.max(...augLate))}%以内`, 8.7, 5.65, 3.85, 1.0, { fontSize: 11.5, valign: 'middle' });
+  addText(slide, `注意：制約付きD基準の11 shotでは、全次数でNaiveの方が有意に小さい（${fmt1(-Math.max(...augN11))}〜${fmt1(-Math.min(...augN11))}%）。I基準の拡張計画は11 shotでもNaiveより良い`, 8.7, 5.65, 3.85, 1.0, { fontSize: 11.5, valign: 'middle' });
   addSource(slide, 'results/csv/paired_comparison.csv（mandatory）、aggregated_metrics.csv');
 }
 
@@ -924,7 +927,7 @@ function addLegendBox(slide, x, y, items, labelW = 4.0) {
     [bodyCell('外周（partial shot）の残差・最大残差'), bodyCell('制約なしD/I最適', { bold: true }), bodyCell('外周shotが多く外挿に強い。重視する場合は半径の目標を外周寄りに')],
     [bodyCell('計測shot数を減らす'), bodyCell('制約付きD/I最適', { bold: true, color: C.accentDark }), bodyCell(`Humanと同じ残差を${Math.min(...redPctAll)}〜${Math.max(...redPctAll)}%少ないshotで達成`)],
     [bodyCell('scan方向依存の誤差が大きい'), bodyCell('制約付きD/I最適', { bold: true, color: C.accentDark }), bodyCell(`3次12 shotでscan成分4倍のとき+${fmt1(D.scan['3'][4].imp)}%`)],
-    [bodyCell('強制計測shotがある'), bodyCell('制約付きD/I最適の拡張計画', { bold: true, color: C.accentDark }), bodyCell(`追加shotが少ないときNaiveより最大${Math.round(augMaxImp)}%小さい。Naiveは少shotでrank不足（11 shotは逆転）`)],
+    [bodyCell('強制計測shotがある'), bodyCell('制約付きD/I最適の拡張計画', { bold: true, color: C.accentDark }), bodyCell(`追加shotが少ないときNaiveより最大${Math.round(augMaxImp)}%小さい。Naiveは少shotでrank不足（D基準の11 shotは逆転）`)],
   ];
   addTableBox(slide, rows, MARGIN_X, 1.65, CONTENT_W, [3.1, 3.3, 5.73], { rowH: 0.66, fontSize: 12 });
 }
