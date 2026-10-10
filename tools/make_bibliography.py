@@ -1,11 +1,14 @@
 """references/references.json から技術報告書の参考文献リスト（thebibliography）を作る。
 
-使い方: python3 tools/make_bibliography.py  → report/generated_bibliography.tex
+使い方: python3 tools/make_bibliography.py
+出力: report/technical_report.tex の「% <自動生成 bibliography>」の印で囲んだ部分を直接書き換える。
 並び順は報告書で最初に引用された順（report/technical_report.tex の \\cite を順に読む）。
 """
 import json
 import re
 from pathlib import Path
+
+from report_tex import REPORT_TEX, replace_generated_blocks
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -72,7 +75,7 @@ def entry(ref):
 
 def main():
     refs = {r["key"]: r for r in json.loads((ROOT / "references" / "references.json").read_text(encoding="utf-8"))["references"]}
-    tex = (ROOT / "report" / "technical_report.tex").read_text(encoding="utf-8")
+    tex = REPORT_TEX.read_text(encoding="utf-8")
     order = []
     for group in re.findall(r"\\cite\{([^}]*)\}", tex):
         for key in group.split(","):
@@ -87,8 +90,9 @@ def main():
     for key in order:
         lines.append(f"\\bibitem{{{key}}} {entry(refs[key])}")
     lines.append("\\end{thebibliography}")
-    (ROOT / "report" / "generated_bibliography.tex").write_text("\n".join(lines) + "\n", encoding="utf-8")
-    print(f"{len(order)} 件を書き出しました。未引用: {unused}")
+    changed = replace_generated_blocks({"bibliography": "\n".join(lines)})
+    state = "書き換えました" if changed else "変更はありませんでした"
+    print(f"{REPORT_TEX.name} の参考文献 {len(order)} 件を確認し、{state}。未引用: {unused}")
 
 
 if __name__ == "__main__":
