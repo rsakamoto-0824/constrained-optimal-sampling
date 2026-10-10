@@ -2,7 +2,8 @@
 % wafer高次補正のアライメント計測shot選択における実務制約付き最適サンプリング（社内技術報告書）
 % Overleaf: メニュー → Compiler を「LuaLaTeX」にしてコンパイルする
 % 図は figures/ フォルダ（results/figures から報告書で使う図をコピーしたもの）を同じ階層に置く
-% 数値は results/csv/*.csv（MATLAB の run_study で生成）から転記した
+% 「自動生成」の印で囲んだ表は tools/make_report_tables.py（results/csv から），参考文献は tools/make_bibliography.py
+% （references/references.json から）が書き換える．本文中の数値は results/csv/*.csv（MATLAB の run_study で生成）から転記した
 % ============================================================
 \documentclass[10.5pt,a4paper]{ltjsarticle}
 \usepackage{amsmath,amssymb,bm}
@@ -560,6 +561,7 @@ HOWA 4次・$N=12$では，C-D-optとC-I-optが同じ設計になった．
   \caption{D/I-efficiency（同じ次数・同じshot数の制約なしD-opt / I-optを1とする．Randomは200抽選の中央値）}
   \label{tab:eff}
   \small
+% <自動生成 efficiency> tools/make_report_tables.py が書き換える（手で編集しない）
 \begin{tabular}{clrrrrrr}
 \toprule
 次数 & 手法 & \multicolumn{2}{c}{$N=8$} & \multicolumn{2}{c}{$N=12$} & \multicolumn{2}{c}{$N=19$} \\
@@ -590,6 +592,7 @@ HOWA 4次・$N=12$では，C-D-optとC-I-optが同じ設計になった．
  & C-I-opt & 0.83 & 0.66 & 0.83 & 0.76 & 0.93 & 0.91 \\
 \bottomrule
 \end{tabular}
+% </自動生成 efficiency>
 \end{table}
 
 \begin{figure}[htbp]
@@ -612,6 +615,7 @@ Randomは85\%の抽選がいずれかの制約を外れた．
   \caption{制約違反の割合とcoverage指標（強制計測shotなし，全次数・全shot数）．Randomは抽選のうち違反したものの割合}
   \label{tab:violation}
   \small
+% <自動生成 violation> tools/make_report_tables.py が書き換える（手で編集しない）
 \begin{tabular}{lrrrrrrr}
 \toprule
 手法 & 象限 & 半径 & scan & いずれか & $\bar{B}_Q$ & $\bar{B}_R$ & $\bar{B}_S$ \\
@@ -625,6 +629,7 @@ C-D-opt（設計の割合） & 0\% & 0\% & 0\% & 0\% & 1.55 & 3.38 & 0.51 \\
 C-I-opt（設計の割合） & 0\% & 0\% & 0\% & 0\% & 1.60 & 3.32 & 0.51 \\
 \bottomrule
 \end{tabular}
+% </自動生成 violation>
 \end{table}
 
 \begin{figure}[htbp]
@@ -644,6 +649,7 @@ C-I-opt（設計の割合） & 0\% & 0\% & 0\% & 0\% & 1.60 & 3.32 & 0.51 \\
   \caption{平均Residual RMS [nm]（1000 wafer，主評価条件，強制計測shotなし．太字は各行の最小）}
   \label{tab:rms}
   \small
+% <自動生成 mean_rms> tools/make_report_tables.py が書き換える（手で編集しない）
 \begin{tabular}{crrrrrrrrr}
 \toprule
 次数 & $N$ & Random & Poisson & Human & D-opt & I-opt & C-D-opt & C-I-opt & 下限 \\
@@ -670,6 +676,7 @@ C-I-opt（設計の割合） & 0\% & 0\% & 0\% & 0\% & 1.60 & 3.32 & 0.51 \\
  & 19 & 2.43 & 1.43 & 1.65 & \textbf{0.88} & 0.88 & 0.90 & 0.93 &  \\
 \bottomrule
 \end{tabular}
+% </自動生成 mean_rms>
 \end{table}
 
 \begin{figure}[htbp]
@@ -711,6 +718,7 @@ $N=12$でのpaired comparisonを表\ref{tab:paired}に示す．
   \caption{$N=12$でのpaired comparison（1000 wafer）．$\Delta$RMSと改善率は正なら提案法が良い．CIはbootstrap（2000回）の95\%信頼区間}
   \label{tab:paired}
   \small
+% <自動生成 paired> tools/make_report_tables.py が書き換える（手で編集しない）
 \begin{tabular}{cclrrrr}
 \toprule
 次数 & 提案法 & 比較法 & 平均$\Delta$RMS [nm] & 平均改善率 [\%] & 95\%CI [\%] & 勝率 \\
@@ -749,6 +757,7 @@ $N=12$でのpaired comparisonを表\ref{tab:paired}に示す．
  & C-I-opt & I-opt & -0.146 & -16.2 & [-17.1, -15.3] & 0.12 \\
 \bottomrule
 \end{tabular}
+% </自動生成 paired>
 \end{table}
 
 \begin{figure}[htbp]
@@ -778,6 +787,7 @@ partial shotの領域は候補shotの外側にあり，補正は外挿になる�
   \caption{tail指標（$N=12$，nm）．平均〜最悪はwaferごとのRMSの1000 waferでの統計，P99$|e|$・Max$|e|$はwafer内の残差の大きさの99\%点・最大値の平均，内側RMSは候補shotのmarkだけのRMSの平均}
   \label{tab:tail}
   \small
+% <自動生成 tail> tools/make_report_tables.py が書き換える（手で編集しない）
 \begin{tabular}{clrrrrrrr}
 \toprule
 次数 & 手法 & 平均 & 中央値 & P95 & 最悪 & P99$|e|$ & Max$|e|$ & 内側RMS \\
@@ -807,6 +817,7 @@ partial shotの領域は候補shotの外側にあり，補正は外挿になる�
  & C-I-opt & 1.08 & 1.06 & 1.39 & 1.91 & 3.59 & 4.60 & 0.82 \\
 \bottomrule
 \end{tabular}
+% </自動生成 tail>
 \end{table}
 
 \begin{figure}[htbp]
@@ -836,6 +847,7 @@ D/I-efficiencyが低い（誤差を増幅しやすい）設計の弱点が，誤
   \caption{mark計測誤差（1σ, nm）とscan方向依存成分の倍率を変えたときの平均RMS [nm]（$N=12$）}
   \label{tab:robust}
   \small
+% <自動生成 robust> tools/make_report_tables.py が書き換える（手で編集しない）
 \begin{tabular}{clrrrrrrr}
 \toprule
 次数 & 手法 & 誤差0.25 & 0.5 & 1.0 & scan×0 & ×0.5 & ×2 & ×4 \\
@@ -862,6 +874,7 @@ D/I-efficiencyが低い（誤差を増幅しやすい）設計の弱点が，誤
  & C-I-opt & 0.93 & 1.08 & 1.53 & 0.88 & 0.93 & 1.52 & 2.63 \\
 \bottomrule
 \end{tabular}
+% </自動生成 robust>
 \end{table}
 
 \begin{figure}[htbp]
@@ -886,6 +899,7 @@ C-D-opt Augmentationの強制shotなしC-D-optに対する比は，5次で$N=7$ 
   \label{tab:mand}
   \scriptsize
   \setlength{\tabcolsep}{3.5pt}
+% <自動生成 mandatory> tools/make_report_tables.py が書き換える（手で編集しない）
 \begin{tabular}{crrrrrrrrrr}
 \toprule
 次数 & $N$ & Random+F & Human+F & D-opt Aug & C-D Naive & C-I Naive & C-D Aug & C-I Aug & C-D（Fなし） & C-I（Fなし） \\
@@ -915,6 +929,7 @@ C-D-opt Augmentationの強制shotなしC-D-optに対する比は，5次で$N=7$ 
  & 19 & 2.55 & 1.56 & 0.86 & 0.86 & 0.92 & 0.87 & 0.92 & 0.90 & 0.93 \\
 \bottomrule
 \end{tabular}
+% </自動生成 mandatory>
 \end{table}
 
 \subsection{augmentation効果}
@@ -960,6 +975,7 @@ waferごとのRMSのP95（悪い側の5\%）を目標にしても，削減shot�
   \caption{Humanと同じ平均RMSに必要な最小shot数（強制計測shotなし）．括弧内はHumanのshot数に対する削減率}
   \label{tab:reduction}
   \small
+% <自動生成 reduction> tools/make_report_tables.py が書き換える（手で編集しない）
 \begin{tabular}{crrrrrr}
 \toprule
 次数 & Human の $N$（目標RMS） & Poisson & D-opt & I-opt & C-D-opt & C-I-opt \\
@@ -980,6 +996,7 @@ waferごとのRMSのP95（悪い側の5\%）を目標にしても，削減shot�
  & 19（1.65\,nm） & 12（+37\%） & 7（+63\%） & 7（+63\%） & 8（+58\%） & 8（+58\%） \\
 \bottomrule
 \end{tabular}
+% </自動生成 reduction>
 \end{table}
 
 \begin{figure}[htbp]
@@ -1010,6 +1027,7 @@ D基準は平均1〜2秒，I基準は逆行列の計算が加わるため長く�
   \caption{設計1件（multi-start全体）の計算時間 [s]（平均 / 最大，MATLAB R2022b，Rosetta 2，並列化なし）}
   \label{tab:time}
   \small
+% <自動生成 time> tools/make_report_tables.py が書き換える（手で編集しない）
 \begin{tabular}{crrrrrrr}
 \toprule
 次数 & D-opt & I-opt & C-D-opt & C-I-opt & C-D Aug & C-I Aug & Poisson \\
@@ -1019,6 +1037,7 @@ D基準は平均1〜2秒，I基準は逆行列の計算が加わるため長く�
 5 & 1.68 / 2.61 & 10.95 / 16.48 & 1.24 / 2.05 & 6.04 / 10.70 & 0.71 / 1.59 & 3.07 / 7.06 & 0.01 / 0.03 \\
 \bottomrule
 \end{tabular}
+% </自動生成 time>
 \end{table}
 
 \subsection{soft制約の補助評価}
@@ -1036,6 +1055,7 @@ $\lambda=0.02$〜0.2の小さい罰則で，scan方向の違反は全条件で0�
   \label{tab:soft}
   \scriptsize
   \setlength{\tabcolsep}{3pt}
+% <自動生成 soft> tools/make_report_tables.py が書き換える（手で編集しない）
 \begin{tabular}{crlcccccc}
 \toprule
 次数 & $N$ & 基準 & $\lambda=0$ & $\lambda=0.02$ & $\lambda=0.05$ & $\lambda=0.2$ & $\lambda=1$ & $\lambda=5$ \\
@@ -1062,6 +1082,7 @@ $\lambda=0.02$〜0.2の小さい罰則で，scan方向の違反は全条件で0�
 5 & 19 & I & 1 / 1.00 / 0.88 & 1 / 1.00 / 0.88 & 1 / 1.00 / 0.88 & 0 / 0.91 / 0.93 & 0 / 0.91 / 0.94 & 0 / 0.91 / 0.94 \\
 \bottomrule
 \end{tabular}
+% </自動生成 soft>
 \end{table}
 
 \begin{figure}[htbp]
@@ -1190,6 +1211,7 @@ wafer高次補正（HOWA型3〜5次）のalignment計測shot選択について�
 
 % ============================================================
 \addcontentsline{toc}{section}{参考文献}
+% <自動生成 bibliography> tools/make_bibliography.py が書き換える（手で編集しない）
 \begin{thebibliography}{99}
 \small
 \bibitem{slonaker1988} S. Slonaker, S. McNamara, K. Konno, et al.，``Enhanced global alignment for production optical lithography,'' Proc. SPIE 922 (Optical/Laser Microlithography), 73-81（1988）． doi:\href{https://doi.org/10.1117/12.968404}{10.1117/12.968404}．
@@ -1231,6 +1253,7 @@ wafer高次補正（HOWA型3〜5次）のalignment計測shot選択について�
 \bibitem{wyant1992} J. C. Wyant, K. Creath，``Basic wavefront aberration theory for optical metrology,'' in Applied Optics and Optical Engineering, Vol. XI (Academic Press)，pp.~1-53（1992）． \url{https://wp.optics.arizona.edu/jcwyant/wp-content/uploads/sites/13/2016/08/03-BasicAberrations_and_Optical_Testing.pdf}．
 \bibitem{efron1993} B. Efron, R. J. Tibshirani，\textit{An Introduction to the Bootstrap}，Chapman \& Hall（1993）．
 \end{thebibliography}
+% </自動生成 bibliography>
 
 
 % ============================================================

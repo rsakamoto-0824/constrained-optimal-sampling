@@ -1,0 +1,680 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="実務制約付き最適サンプリングのシミュレーション（MATLAB）を実行し、結果を確認して報告書へ反映するまでの手順書。">
+  <title>最適サンプリング シミュレーション実行手順書</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="procedure-guide.css">
+  <style>
+    /* 手順の中のコード例が長いと狭い画面で横にはみ出すため、手順の本文を画面の幅に収め、コードだけを横スクロールにする */
+    .numbered-steps li > div {
+      min-width: 0;
+    }
+  </style>
+  <script src="procedure-guide.js" defer></script>
+</head>
+<body id="top">
+  <a class="skip-link" href="#main-content">本文へ移動</a>
+
+  <button
+    id="toc-toggle"
+    class="toc-toggle"
+    type="button"
+    aria-controls="sidebar"
+    aria-expanded="false"
+  >
+    <span aria-hidden="true">☰</span> 目次
+  </button>
+
+  <aside id="sidebar" class="sidebar" aria-label="目次">
+    <div class="sidebar-header">
+      <p class="eyebrow">Internal Procedure</p>
+      <p class="sidebar-title">制約付き最適サンプリング</p>
+      <p class="sidebar-subtitle">シミュレーション実行手順書</p>
+    </div>
+    <nav>
+      <ol class="toc-list">
+        <li><a href="#overview">1. 目的と対象</a></li>
+        <li><a href="#prerequisites">2. 作業前の確認</a></li>
+        <li><a href="#workflow">3. 全体の流れ</a></li>
+        <li><a href="#smoke-test">4. 動作確認</a></li>
+        <li><a href="#configuration">5. 評価条件の設定</a></li>
+        <li><a href="#full-run">6. 本計算の実行</a></li>
+        <li><a href="#results">7. 結果の確認</a></li>
+        <li><a href="#report">8. 報告書と説明資料の更新</a></li>
+        <li><a href="#verification">9. 完了確認</a></li>
+        <li><a href="#troubleshooting">10. 困ったとき</a></li>
+      </ol>
+    </nav>
+    <div class="sidebar-footer">
+      <span class="status-dot" aria-hidden="true"></span>
+      社内利用
+    </div>
+  </aside>
+  <div id="sidebar-overlay" class="sidebar-overlay" aria-hidden="true"></div>
+
+  <main id="main-content" class="main-content">
+    <header class="hero">
+      <div class="hero-content">
+        <p class="eyebrow">Operating Guide · Internal Use</p>
+        <h1>制約付き最適サンプリング<br><span>シミュレーション実行手順書</span></h1>
+        <p class="hero-lead">
+          この手順書では、リポジトリ <code>constrained-optimal-sampling</code> の MATLAB シミュレーションを動かし、
+          結果を確認して技術報告書・説明資料へ反映するまでの操作を説明します。
+        </p>
+        <div class="hero-badges" aria-label="文書情報">
+          <span>対象: MATLAB で評価を実行する担当者</span>
+          <span>所要時間: 動作確認 約5分／本計算 約35分</span>
+          <span>更新日: 2026/10/10</span>
+        </div>
+      </div>
+    </header>
+
+    <section id="overview" class="content-section">
+      <div class="section-heading">
+        <span class="section-number">01</span>
+        <div>
+          <p class="section-kicker">Overview</p>
+          <h2>目的と対象</h2>
+        </div>
+      </div>
+      <p>
+        このシミュレーションは、wafer 高次補正（HOWA をモチーフにした 3〜5 次の多項式補正）で使うアライメント計測 shot を、
+        実務制約（象限・半径領域・scan 方向・強制計測 shot・partial shot 除外）を満たしたうえで D 最適／I 最適に選び、
+        Random・Poisson Disk・Human（ルールベース）などの選び方と、1000 枚の模擬 wafer での補正残差を比べるものです。
+        評価条件を変えて計算し直したいとき、または計算結果を報告書へ反映したいときにこの手順を使います。
+      </p>
+
+      <div class="card-grid three-columns">
+        <article class="feature-card">
+          <span class="card-label">Audience</span>
+          <h3>対象者</h3>
+          <p>MATLAB のコマンドウィンドウにコマンドを入力し、設定ファイル（JSON）を書き換えられる人。プログラムを書く必要はありません。</p>
+        </article>
+        <article class="feature-card">
+          <span class="card-label">Scope</span>
+          <h3>対象範囲</h3>
+          <p>評価条件の設定、計算の実行（<code>run_study</code>）、結果の確認、報告書 <code>report/technical_report.tex</code> と説明資料の更新。</p>
+        </article>
+        <article class="feature-card">
+          <span class="card-label">Goal</span>
+          <h3>完了条件</h3>
+          <p>結果フォルダに CSV・図・実行記録がそろい、必要な場合は報告書の表と図、本文の数値が新しい結果に合っている状態。</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="prerequisites" class="content-section">
+      <div class="section-heading">
+        <span class="section-number">02</span>
+        <div>
+          <p class="section-kicker">Prerequisites</p>
+          <h2>作業前の確認</h2>
+        </div>
+      </div>
+      <ul class="check-list">
+        <li>MATLAB R2020b 以降が使える（R2022b で確認済み）。Toolbox は不要です。Parallel Computing Toolbox があれば並列計算もできます（なくても結果は同じ）。</li>
+        <li>リポジトリ一式が手元にある（<code>run_study.m</code> と <code>config/</code>・<code>src/</code> フォルダが同じ場所にある）。</li>
+        <li>空き容量が結果フォルダ1つあたり約 250 MB ある（本計算で約 210 MB。うち <code>study_results.mat</code> が約 130 MB）。</li>
+        <li>本計算の約 35 分のあいだ、パソコンをスリープさせずに置いておける。</li>
+        <li>報告書を更新する場合は Python 3 が使える（追加のライブラリは不要）。PDF を作るには Overleaf か LuaLaTeX を使います。</li>
+        <li>説明資料（PowerPoint）を作り直す場合は Node.js と <code>pptxgenjs</code>、Python の <code>python-pptx</code> が使える。</li>
+        <li>認証情報や環境変数の設定は不要です。</li>
+      </ul>
+
+      <div class="callout warning">
+        <div class="callout-icon" aria-hidden="true">!</div>
+        <div>
+          <h3>作業前の注意</h3>
+          <p>
+            <strong><code>config/default_config.json</code> のまま本計算をすると、Git に登録済みの <code>results/</code> が上書きされます。</strong>
+            試しの計算は、5章の手順で保存先（<code>study.output_dir</code>）を別のフォルダにした設定ファイルで行ってください。
+          </p>
+          <p>
+            このリポジトリの数値はすべて乱数で作った模擬データです。実際の Human 配置や実工程の値を入れる場合、それは社内情報です。
+            その設定ファイルや結果を Git に登録したり、Overleaf などの外部サービスへアップロードしたりしないでください。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="workflow" class="content-section">
+      <div class="section-heading">
+        <span class="section-number">03</span>
+        <div>
+          <p class="section-kicker">Workflow</p>
+          <h2>全体の流れ</h2>
+        </div>
+      </div>
+      <div class="workflow">
+        <div class="workflow-step"><span>1</span><strong>動作確認</strong><small>テストと小規模計算（約5分）</small></div>
+        <div class="workflow-arrow" aria-hidden="true">→</div>
+        <div class="workflow-step"><span>2</span><strong>条件設定</strong><small>自分用の設定ファイルを作る</small></div>
+        <div class="workflow-arrow" aria-hidden="true">→</div>
+        <div class="workflow-step"><span>3</span><strong>本計算</strong><small><code>run_study</code> を実行（約35分）</small></div>
+        <div class="workflow-arrow" aria-hidden="true">→</div>
+        <div class="workflow-step"><span>4</span><strong>結果確認</strong><small>実行記録・CSV・図を見る</small></div>
+        <div class="workflow-arrow" aria-hidden="true">→</div>
+        <div class="workflow-step"><span>5</span><strong>報告書へ反映</strong><small>図・表・本文・資料を更新</small></div>
+      </div>
+      <p class="note">
+        既定の条件のまま結果を見るだけなら、手順2を飛ばせます。報告書を更新しない場合は手順5が不要です。
+      </p>
+    </section>
+
+    <section id="smoke-test" class="content-section">
+      <div class="section-heading">
+        <span class="section-number">04</span>
+        <div>
+          <p class="section-kicker">Smoke Test</p>
+          <h2>動作確認</h2>
+        </div>
+      </div>
+      <p>本計算の前に、プログラムが正しく動くかを短い計算で確かめます。</p>
+      <ol class="numbered-steps">
+        <li>
+          <div>
+            <strong>MATLAB を起動し、リポジトリのフォルダへ移動する</strong>
+            <p>
+              コマンドウィンドウで <code>cd</code> を実行するか、「現在のフォルダー」でリポジトリのフォルダを開きます。
+              以下のパスは例です。実際に置いた場所に読み替えてください。
+            </p>
+            <div class="code-block" data-language="MATLAB">
+              <button class="copy-button" type="button">コピー</button>
+              <pre><code>cd('C:\work\constrained-optimal-sampling')      % Windows の例
+cd('~/work/constrained-optimal-sampling')       % macOS の例</code></pre>
+            </div>
+            <p>「現在のフォルダー」に <code>run_study.m</code> が見えていれば正しい場所です。</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <strong>自動テストを実行する（約1分）</strong>
+            <div class="code-block" data-language="MATLAB">
+              <button class="copy-button" type="button">コピー</button>
+              <pre><code>run_tests</code></pre>
+            </div>
+            <p>
+              15 件のテスト結果の表のあとに <code>合格 15 / 15</code> と表示されれば成功です。
+              途中で作る <code>results_test/</code> フォルダは Git の対象外です。
+            </p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <strong>小規模な計算を実行する（約4分）</strong>
+            <div class="code-block" data-language="MATLAB">
+              <button class="copy-button" type="button">コピー</button>
+              <pre><code>run_study('config/smoke_config.json')</code></pre>
+            </div>
+            <p>
+              <code>[日時] 開始: smoke_test</code> から進み具合が順に表示され、最後に
+              <code>完了: 合計 ○○ 秒。結果は …/results_smoke</code> と出れば成功です。
+              結果は <code>results_smoke/</code> に保存されます（Git の対象外）。時間の大半は図の作成です。
+            </p>
+          </div>
+        </li>
+      </ol>
+
+      <div class="callout tip">
+        <div class="callout-icon" aria-hidden="true">✓</div>
+        <div>
+          <h3>操作のポイント</h3>
+          <p>
+            小規模計算は wafer 40 枚・HOWA 3 次と 5 次だけ・最適化の初期解 3 回で計算するため、数値に意味はありません。
+            エラーなく最後まで進むかだけを確認してください。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="configuration" class="content-section">
+      <div class="section-heading">
+        <span class="section-number">05</span>
+        <div>
+          <p class="section-kicker">Configuration</p>
+          <h2>評価条件の設定</h2>
+        </div>
+      </div>
+      <p>
+        評価条件はすべて <code>config/default_config.json</code> に書かれています（プログラムに数値は埋め込まれていません）。
+        このファイルは報告書の結果を作った条件なので直接は書き換えず、<strong>変えたい項目だけを書いた自分用の設定ファイル</strong>を作ります。
+        自分用の設定ファイルは、先に <code>default_config.json</code> を読み込み、書いた項目だけを上書きします。
+      </p>
+      <ol class="numbered-steps">
+        <li>
+          <div>
+            <strong>config フォルダに自分用の設定ファイルを作る</strong>
+            <p>
+              例として <code>config/my_study.json</code> を作り、次の内容を貼り付けます。
+              <code>output_dir</code> は <code>results</code> 以外の名前にしてください。
+            </p>
+            <div class="code-block" data-language="JSON">
+              <button class="copy-button" type="button">コピー</button>
+              <pre><code>{
+  "_about": "自分用の検討設定。default_config.json を読み込み、ここに書いた項目だけを上書きする。",
+  "base_config": "default_config.json",
+  "study": {"name": "my_study", "output_dir": "results_my_study"},
+  "mark_noise": {"levels": {"low": [0.25, 0.25], "nominal": [0.8, 0.8], "high": [1.5, 1.5]}}
+}</code></pre>
+            </div>
+            <p>この例は、mark 計測誤差（1σ）の nominal を 0.8 nm、high を 1.5 nm に変えた条件です。</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <strong>変えたい項目を書き足す</strong>
+            <p>よく変える項目は下の表のとおりです。各項目の詳しい説明は <code>default_config.json</code> の <code>_note</code> に書かれています。</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <strong>設定ファイルを読み込めるか確かめる</strong>
+            <div class="code-block" data-language="MATLAB">
+              <button class="copy-button" type="button">コピー</button>
+              <pre><code>setup_paths;
+cfg = load_config('config/my_study.json');
+cfg.study.output_dir</code></pre>
+            </div>
+            <p>
+              <code>'results_my_study'</code> と表示されれば読み込めています。
+              書き方に誤りがあると、どの項目をどう直せばよいかがエラーメッセージに表示されます。
+            </p>
+          </div>
+        </li>
+      </ol>
+
+      <h3>よく変える項目</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>変えたいこと</th><th>項目</th><th>既定値（★は仮定値）</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>結果の保存先</td><td><code>study.output_dir</code></td><td><code>results</code></td></tr>
+            <tr><td>乱数の種（同じ値なら同じ結果）</td><td><code>study.master_seed</code></td><td>20261004</td></tr>
+            <tr><td>模擬 wafer の枚数</td><td><code>monte_carlo.n_wafers</code></td><td>1000</td></tr>
+            <tr><td>HOWA の次数</td><td><code>howa.orders</code></td><td>[3, 4, 5]</td></tr>
+            <tr><td>計測 shot 数の範囲と刻み</td><td><code>sweep</code></td><td>N_min〜19 shot を 1 shot 刻み</td></tr>
+            <tr><td>shot サイズ・pitch・格子原点</td><td><code>shot</code></td><td>26 × 33 mm、原点 (0, 0) ★</td></tr>
+            <tr><td>edge exclusion</td><td><code>wafer.edge_exclusion_mm</code></td><td>3 mm ★</td></tr>
+            <tr><td>alignment mark の位置</td><td><code>marks.offsets_mm</code></td><td>shot 中心から (±12, ±15.5) mm の4点 ★</td></tr>
+            <tr><td>scan 方向の割当</td><td><code>scan.assignment</code></td><td>隣接する列で Up/Down 交互 ★（CSV でも指定可）</td></tr>
+            <tr><td>象限・半径領域・scan の制約</td><td><code>constraints</code></td><td>象限 1/4 ± 5%、半径 1/3 ± 10%（境界 0.5 / 0.7）、|Up − Down| ≤ 1 ★</td></tr>
+            <tr><td>強制計測 shot</td><td><code>mandatory</code></td><td>中心と上下左右の十字 5 shot ★</td></tr>
+            <tr><td>Human 配置を実配置にする</td><td><code>human.csv_path</code></td><td>空欄（ルールベース）★</td></tr>
+            <tr><td>mark 計測誤差（1σ）</td><td><code>mark_noise.levels</code></td><td>low 0.25 / nominal 0.5 / high 1.0 nm ★</td></tr>
+            <tr><td>評価条件の組合せ</td><td><code>conditions</code></td><td>7 条件（最初の nominal が主評価）</td></tr>
+            <tr><td>最適化の初期解の数</td><td><code>optimizer.n_starts</code></td><td>200 ★</td></tr>
+            <tr><td>soft 制約の補助評価</td><td><code>soft_constraint_study.enabled</code></td><td>true（約10分かかる）</td></tr>
+            <tr><td>並列計算</td><td><code>parallel.enabled</code></td><td>false</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout warning">
+        <div class="callout-icon" aria-hidden="true">!</div>
+        <div>
+          <h3>上書きのきまり</h3>
+          <p>
+            <code>{ }</code> で囲んだ項目は、書いた中身だけが上書きされます。<code>[ ]</code> で囲んだ一覧（<code>howa.orders</code>、<code>conditions</code> など）は、一覧ごと置き換わります。
+          </p>
+          <p>
+            HOWA の次数を変えたら <code>soft_constraint_study.howa_orders</code> と <code>appendix.howa_order</code> も、選んだ次数の中から選んでください。
+            計測 shot 数の範囲を変えたら <code>figures.map_n_shots</code>・<code>figures.reference_n_shots</code>・<code>appendix.n_shots</code> も範囲内の shot 数にしてください。
+            書き方の見本は <code>config/smoke_config.json</code> です。
+          </p>
+        </div>
+      </div>
+
+      <h3>強制計測 shot・Human 配置を shot ID で指定する</h3>
+      <p>
+        shot ID は、一度計算した結果の <code>csv/shot_candidates.csv</code> で確認できます（<code>is_candidate</code> が 1 の行が候補 shot）。
+        強制計測 shot は <code>mandatory.shot_ids</code> に ID を並べます（空欄のときは <code>positions_mm</code> の座標に最も近い候補 shot を使います）。
+      </p>
+      <div class="code-block" data-language="JSON">
+        <button class="copy-button" type="button">コピー</button>
+        <pre><code>"mandatory": {"shot_ids": [18, 51, 54, 57, 90]}</code></pre>
+      </div>
+      <p>
+        Human 配置を実際の配置にするには、列 <code>n_shots, shot_id</code> の CSV を作り、そのパスを <code>human.csv_path</code> に書きます。
+        CSV に書いた shot 数ではその配置を使い、それ以外の shot 数はルールベースのままです。次の例は 5 shot のときに中心と十字の 5 shot を使う指定です。
+      </p>
+      <div class="code-block" data-language="CSV">
+        <button class="copy-button" type="button">コピー</button>
+        <pre><code>n_shots,shot_id
+5,18
+5,51
+5,54
+5,57
+5,90</code></pre>
+      </div>
+    </section>
+
+    <section id="full-run" class="content-section">
+      <div class="section-heading">
+        <span class="section-number">06</span>
+        <div>
+          <p class="section-kicker">Full Run</p>
+          <h2>本計算の実行</h2>
+        </div>
+      </div>
+      <ol class="numbered-steps">
+        <li>
+          <div>
+            <strong>使う設定ファイルを指定して実行する</strong>
+            <div class="code-block" data-language="MATLAB">
+              <button class="copy-button" type="button">コピー</button>
+              <pre><code>run_study('config/my_study.json')            % 自分用の設定（results_my_study/ に保存）
+run_study('config/default_config.json')      % 報告書と同じ条件（results/ を上書き）</code></pre>
+            </div>
+            <p>報告書の結果を作り直すときだけ、2行目の <code>default_config.json</code> を使います。</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <strong>終わるまで待つ（既定の条件で約35分）</strong>
+            <p>
+              進み具合はコマンドウィンドウと結果フォルダの <code>logs/run_log.txt</code> に表示されます。
+              2026/10/04 の本計算（R2022b、並列化なし）の内訳は、設計 12.9 分、Monte Carlo 評価 4.6 分、統計 2.4 分、soft 制約の補助評価 9.7 分、図 3.4 分でした。
+            </p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <strong>完了の表示を確かめる</strong>
+            <p><code>完了: 合計 ○○ 秒。結果は …</code> と表示されれば終了です。結果の見方は7章を参照してください。</p>
+          </div>
+        </li>
+      </ol>
+
+      <h3>時間を短くしたいとき</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>方法</th><th>やり方</th><th>影響</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>図を作らない</td><td><code>run_study('config/my_study.json', 'MakeFigures', false)</code></td><td>約3分短くなる。図は後から作れる（7章）</td></tr>
+            <tr><td>soft 制約の補助評価を省く</td><td>設定に <code>"soft_constraint_study": {"enabled": false}</code></td><td>約10分短くなる。報告書の表は作れなくなる</td></tr>
+            <tr><td>並列計算にする</td><td>設定に <code>"parallel": {"enabled": true}</code></td><td>Monte Carlo 評価が速くなる。Parallel Computing Toolbox が必要。結果は同じ</td></tr>
+            <tr><td>初期解・wafer を減らす</td><td><code>optimizer.n_starts</code>、<code>monte_carlo.n_wafers</code> を小さくする</td><td>速くなるが、設計の最適性と統計の精度が下がる</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout info">
+        <div class="callout-icon" aria-hidden="true">i</div>
+        <div>
+          <h3>途中で止めたいとき</h3>
+          <p>
+            コマンドウィンドウで <kbd>Ctrl</kbd> + <kbd>C</kbd> を押すと止まります。途中からの再開はできないため、もう一度最初から実行してください。
+            同じ設定・同じ乱数の種なら、何度実行しても同じ結果になります。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="results" class="content-section">
+      <div class="section-heading">
+        <span class="section-number">07</span>
+        <div>
+          <p class="section-kicker">Results</p>
+          <h2>結果の確認</h2>
+        </div>
+      </div>
+      <p>結果は設定ファイルの <code>output_dir</code> のフォルダ（既定は <code>results/</code>）に保存されます。主なファイルは次のとおりです。</p>
+      <div class="output-grid">
+        <article><code>logs/run_log.txt</code><span>実行の記録。最後の行が「完了」なら正常終了</span></article>
+        <article><code>logs/timing_log.csv</code><span>段階ごとの計算時間（秒）</span></article>
+        <article><code>csv/aggregated_metrics.csv</code><span>手法・次数・shot 数・条件ごとの残差の統計。<code>rms_vec_nm_mean</code> が平均 RMS</span></article>
+        <article><code>csv/paired_comparison.csv</code><span>提案法と比較法の wafer ごとの差（改善率・信頼区間・勝率）</span></article>
+        <article><code>csv/shot_reduction.csv</code><span>基準の手法と同じ残差に必要な最小 shot 数と削減率</span></article>
+        <article><code>csv/selected_shots.csv</code><span>各手法・次数・shot 数で選ばれた shot</span></article>
+        <article><code>csv/design_metrics.csv</code><span>D/I-efficiency・coverage・制約違反・計算時間</span></article>
+        <article><code>csv/wafer_results_*.csv</code><span>wafer ごとの残差（1ファイル約 10 MB。Spotfire などでの分析用）</span></article>
+        <article><code>figures/</code>、<code>figures/appendix/</code><span>図（PNG、300 dpi）。名前の番号は報告書の図番号と対応</span></article>
+        <article><code>run_info.json</code>、<code>config_used.json</code><span>乱数の種・MATLAB の版・Git のコミット・使った設定</span></article>
+      </div>
+
+      <h3>まず見る図</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>ファイル名</th><th>内容</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>fig02_sampling_map_*.png</code></td><td>各手法が選んだ計測 shot の配置</td></tr>
+            <tr><td><code>fig03_rms_vs_shots_base.png</code></td><td>計測 shot 数と平均残差 RMS の関係（強制計測 shot なし）</td></tr>
+            <tr><td><code>fig04_tail_vs_shots_base.png</code></td><td>悪い側の残差（wafer ごとの RMS の P95、wafer 内の最大残差）</td></tr>
+            <tr><td><code>fig08_paired_improvement_base.png</code></td><td>提案法の改善率と信頼区間</td></tr>
+            <tr><td><code>fig10_shot_reduction_base.png</code></td><td>同じ残差に必要な shot 数の削減</td></tr>
+            <tr><td><code>fig12_augmentation.png</code></td><td>強制計測 shot ありでの拡張計画（Augmentation）の効果</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">ファイル名の <code>_base</code> は強制計測 shot なし、<code>_mandatory</code> は強制計測 shot ありの結果です。</p>
+
+      <h3>図だけを作り直す</h3>
+      <p>保存済みの結果（<code>study_results.mat</code>）から図だけを作り直せます。MATLAB を起動し直した直後は、先に <code>setup_paths</code> を実行します。</p>
+      <div class="code-block" data-language="MATLAB">
+        <button class="copy-button" type="button">コピー</button>
+        <pre><code>setup_paths;
+make_figures('results_my_study');
+make_appendix_figures('results_my_study');</code></pre>
+      </div>
+
+      <h3>最適化の初期解の数が足りているか確かめる（任意・約3分）</h3>
+      <div class="code-block" data-language="MATLAB">
+        <button class="copy-button" type="button">コピー</button>
+        <pre><code>addpath('tools');
+check_multistart('config/my_study.json');</code></pre>
+      </div>
+      <p>初期解 20 / 100 / 200 / 400 回の結果を比べた表が表示され、結果フォルダの <code>csv/multistart_check.csv</code> に保存されます。値が 1 に近いほど、回数を増やしても改善しないことを表します。</p>
+    </section>
+
+    <section id="report" class="content-section">
+      <div class="section-heading">
+        <span class="section-number">08</span>
+        <div>
+          <p class="section-kicker">Report</p>
+          <h2>報告書と説明資料の更新</h2>
+        </div>
+      </div>
+      <p>
+        報告書の tex は <code>report/technical_report.tex</code> の1ファイルだけです。
+        tex の中で <code>% &lt;自動生成 名前&gt;</code> と <code>% &lt;/自動生成 名前&gt;</code> の印で囲んだ部分（表 10 個と参考文献リスト）はスクリプトが書き換えるので、手で編集しないでください。
+        それ以外の本文は手で編集します。
+      </p>
+      <ol class="numbered-steps">
+        <li>
+          <div>
+            <strong>報告書で使う図をコピーする（MATLAB）</strong>
+            <p><code>report/figures/</code> にある図と同じ名前の図を、結果フォルダから上書きコピーします。</p>
+            <div class="code-block" data-language="MATLAB">
+              <button class="copy-button" type="button">コピー</button>
+              <pre><code>resultDir = 'results';                          % 本計算の結果フォルダ
+reportFigures = dir(fullfile('report', 'figures', '*.png'));
+for k = 1:numel(reportFigures)
+    name = reportFigures(k).name;
+    source = fullfile(resultDir, 'figures', name);
+    if ~isfile(source)
+        source = fullfile(resultDir, 'figures', 'appendix', name);
+    end
+    copyfile(source, fullfile('report', 'figures', name));
+end
+fprintf('%d 個の図をコピーしました\n', numel(reportFigures));</code></pre>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div>
+            <strong>報告書の表を更新する（ターミナル）</strong>
+            <p>リポジトリのフォルダでターミナル（Windows はコマンドプロンプト）を開いて実行します。Windows では <code>python3</code> の代わりに <code>py</code> を使います。</p>
+            <div class="code-block" data-language="Terminal">
+              <button class="copy-button" type="button">コピー</button>
+              <pre><code>python3 tools/make_report_tables.py</code></pre>
+            </div>
+            <p>最後に <code>technical_report.tex の表 10 個を確認し、○ 個を書き換えました</code> と表示されます。書き換えた表の名前も表示されます。</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <strong>本文中の数値を確かめて直す</strong>
+            <p>
+              本文の文章と、印の外にある表（評価条件の表、代表 wafer の表など）は自動では変わりません。
+              手順2で画面に出た <code>% 要約</code> の行と <code>results/csv</code> を見ながら、本文の数値と結論の向きが新しい結果に合っているかを確かめて直します。
+            </p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <strong>参考文献を変えた場合は参考文献リストを更新する</strong>
+            <div class="code-block" data-language="Terminal">
+              <button class="copy-button" type="button">コピー</button>
+              <pre><code>python3 tools/make_bibliography.py</code></pre>
+            </div>
+            <p>正本は <code>references/references.json</code> です。並び順は本文で最初に引用された順になります。</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <strong>PDF を作る</strong>
+            <p>
+              Overleaf では <code>report/</code> フォルダ（<code>technical_report.tex</code> と <code>figures/</code>）をアップロードし、メニューの Compiler を <strong>LuaLaTeX</strong> にしてコンパイルします。
+              手元に LuaLaTeX がある場合は、<code>report</code> フォルダで次を実行します。
+            </p>
+            <div class="code-block" data-language="Terminal">
+              <button class="copy-button" type="button">コピー</button>
+              <pre><code>latexmk -lualatex technical_report.tex</code></pre>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div>
+            <strong>説明資料（PowerPoint）を作り直す</strong>
+            <p>
+              <code>docs/results-briefing_src/README.md</code> の手順に従います。数値は <code>results/csv</code> から自動で取り出されますが、
+              結論の向きが変わっていないかはスライドを見て確認してください。
+            </p>
+          </div>
+        </li>
+      </ol>
+
+      <div class="callout warning">
+        <div class="callout-icon" aria-hidden="true">!</div>
+        <div>
+          <h3>報告書の表を更新できる結果</h3>
+          <p>
+            <code>make_report_tables.py</code> は、既定と同じ評価条件（HOWA 3〜5 次、7 条件、shot 数 19 まで、soft 制約の補助評価あり）の結果を前提にしています。
+            ほかの結果フォルダを使うときは <code>python3 tools/make_report_tables.py results_my_study</code> のようにフォルダ名を付けますが、
+            条件が足りないとエラーで止まるか、表に <code>--</code> が入ります。
+          </p>
+          <p>Overleaf は外部サービスです。模擬データ以外の値を含む報告書はアップロードしないでください。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="verification" class="content-section">
+      <div class="section-heading">
+        <span class="section-number">09</span>
+        <div>
+          <p class="section-kicker">Verification</p>
+          <h2>完了確認</h2>
+        </div>
+      </div>
+      <div class="checklist-grid">
+        <article>
+          <h3>計算結果の確認</h3>
+          <label><input type="checkbox"> <code>logs/run_log.txt</code> の最後の行が「完了」になっている</label>
+          <label><input type="checkbox"> <code>csv/</code> に CSV が 23 個ある（既定の条件の場合）</label>
+          <label><input type="checkbox"> <code>figures/</code> と <code>figures/appendix/</code> に図ができている</label>
+          <label><input type="checkbox"> <code>run_info.json</code> に乱数の種と使った設定が記録されている</label>
+          <label><input type="checkbox"> 試しの計算で <code>results/</code> を上書きしていない</label>
+        </article>
+        <article>
+          <h3>報告書・資料の確認</h3>
+          <label><input type="checkbox"> 報告書で使う図をコピーした</label>
+          <label><input type="checkbox"> 表の更新スクリプトを実行し、書き換えの表示を確かめた</label>
+          <label><input type="checkbox"> 本文中の数値と結論の向きを新しい結果で確かめた</label>
+          <label><input type="checkbox"> PDF がエラーなくコンパイルできた</label>
+          <label><input type="checkbox"> 実データや社内情報を Git や外部サービスに出していない</label>
+        </article>
+      </div>
+    </section>
+
+    <section id="troubleshooting" class="content-section">
+      <div class="section-heading">
+        <span class="section-number">10</span>
+        <div>
+          <p class="section-kicker">Troubleshooting</p>
+          <h2>困ったとき</h2>
+        </div>
+      </div>
+      <div class="faq-list">
+        <details>
+          <summary>「関数または変数 'run_study' が認識されません」と出る</summary>
+          <div><p>MATLAB の「現在のフォルダー」がリポジトリのフォルダになっていません。4章の手順1で移動してから実行し直してください。<code>make_figures</code> などで同じ表示が出る場合は、先に <code>setup_paths</code> を実行します。</p></div>
+        </details>
+        <details>
+          <summary>「設定ファイルが見つかりません」と出る</summary>
+          <div><p>指定したパスにファイルがありません。<code>'config/my_study.json'</code> のようにリポジトリのフォルダからのパスで書くか、フルパスで指定してください。ファイル名のつづりと拡張子 <code>.json</code> も確かめてください。</p></div>
+        </details>
+        <details>
+          <summary>設定ファイルを読み込むとエラーになる</summary>
+          <div>
+            <p>JSON の書き方の誤りが多い原因です。最後の項目の後ろに <code>,</code> を付けていないか、<code>"</code> や括弧を閉じ忘れていないかを確かめてください。</p>
+            <p>値の誤りの場合は「<code>constraints.radial.names の数（2）を領域数（境界数+1 = 3）に合わせてください。</code>」のように、直す項目と直し方が表示されます。</p>
+          </div>
+        </details>
+        <details>
+          <summary>Human 配置の CSV でエラーになる</summary>
+          <div><p>列名が <code>n_shots, shot_id</code> になっているか、shot_id が候補 shot（<code>shot_candidates.csv</code> の <code>is_candidate</code> が 1）か、同じ <code>n_shots</code> の行数がその shot 数と同じかを確かめてください。エラーメッセージに該当する shot_id と shot 数が表示されます。</p></div>
+        </details>
+        <details>
+          <summary>誤って <code>results/</code> を上書きしてしまった</summary>
+          <div>
+            <p>Git に登録済みの CSV・実行記録は、リポジトリのフォルダで次を実行すると登録時の状態に戻せます。<code>results/figures/</code> と <code>study_results.mat</code> は Git の対象外なので戻せません。必要なら <code>default_config.json</code> で本計算をやり直してください（同じ結果になります）。</p>
+            <div class="code-block" data-language="Terminal">
+              <button class="copy-button" type="button">コピー</button>
+              <pre><code>git restore results</code></pre>
+            </div>
+          </div>
+        </details>
+        <details>
+          <summary>報告書の表に「rank不足」や「--」が入る</summary>
+          <div><p>「rank不足」は、その shot 数では HOWA の係数を推定できる配置が作れなかったことを表し、強制計測 shot ありで shot 数が少ない場合に起こります。異常ではありません。「--」はその条件の結果がないことを表します。既定と違う条件の結果フォルダを使っていないか確かめてください。</p></div>
+        </details>
+        <details>
+          <summary>表の更新スクリプトが「印の組が1つだけ必要です」と止まる</summary>
+          <div><p><code>technical_report.tex</code> の <code>% &lt;自動生成 名前&gt;</code> または <code>% &lt;/自動生成 名前&gt;</code> の行が消えたか、重複しています。<code>git diff report/technical_report.tex</code> で消した行を確かめて元に戻してください。</p></div>
+        </details>
+        <details>
+          <summary>図のフォントが Arial にならない</summary>
+          <div><p>macOS の MATLAB では、図のフォントがほかのフォントに置き換わることがあります。数値や結果には影響しません。</p></div>
+        </details>
+      </div>
+
+      <div class="callout info">
+        <div class="callout-icon" aria-hidden="true">i</div>
+        <div>
+          <h3>解決しない場合</h3>
+          <p>エラーメッセージの全文、使った設定ファイル、結果フォルダの <code>logs/run_log.txt</code> を控えて、このリポジトリの管理者に相談してください。設定の詳しい説明は <code>README.md</code> と報告書の「評価方法」の章にあります。</p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="page-footer">
+      <p>最適サンプリング シミュレーション実行手順書 · constrained-optimal-sampling</p>
+      <p>更新日: 2026/10/10 · 版: 1.0</p>
+    </footer>
+  </main>
+
+  <button id="back-to-top" class="back-to-top" type="button" aria-label="ページ上部へ戻る">
+    <span aria-hidden="true">↑</span>
+    トップへ戻る
+  </button>
+</body>
+</html>

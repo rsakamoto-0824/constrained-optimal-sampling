@@ -1,8 +1,8 @@
 """results/csv の評価結果から、技術報告書に載せる表（LaTeX）と本文の数値を作る。
 
 使い方: python3 tools/make_report_tables.py [結果フォルダ]（既定は results）
-出力: report/generated_tables.tex（報告書へ貼り付ける表の元）と、画面への数値の要約
-報告書の tex は単独ファイルにするため、この出力を technical_report.tex に転記している。
+出力: report/technical_report.tex の「% <自動生成 名前>」の印で囲んだ表を直接書き換え、
+      本文の数値を確かめるための要約を画面に表示する（報告書の tex は1ファイルにまとめている）。
 """
 import csv
 import math
@@ -10,6 +10,8 @@ import statistics
 import sys
 from collections import defaultdict
 from pathlib import Path
+
+from report_tex import REPORT_TEX, replace_generated_blocks
 
 ROOT = Path(__file__).resolve().parent.parent
 RESULTS = ROOT / (sys.argv[1] if len(sys.argv) > 1 else "results")
@@ -74,11 +76,28 @@ def fmt(x, digits=2):
 
 
 out = []
+table_starts = []  # (報告書の印の名前, out の中で表が始まる位置)
+
+
+def start_table(name, title):
+    """表の見出しを out に書き、報告書の差し替えに使う名前と位置を記録する。"""
+    out.append(f"% 表: {title}")
+    table_starts.append((name, len(out)))
+
+
+def collect_tables():
+    """記録した位置から \\end{tabular} までを、印の名前ごとの文字列にする。"""
+    end = "\\end{tabular}"
+    tables = {}
+    for name, start in table_starts:
+        text = "\n".join(out[start:])
+        tables[name] = text[:text.index(end) + len(end)]
+    return tables
 
 
 def table_mean_rms():
     ns = [6, 8, 10, 12, 15, 19]
-    out.append("% 表: 平均RMS（主評価条件・強制shotなし）")
+    start_table("mean_rms", "平均RMS（主評価条件・強制shotなし）")
     out.append("\\begin{tabular}{cr" + "r" * len(BASE) + "r}\n\\toprule")
     out.append("次数 & $N$ & " + " & ".join(LABEL[m] for m in BASE) + " & 下限 \\\\\n\\midrule")
     for o in ORDERS:
@@ -100,7 +119,7 @@ def table_mean_rms():
 
 
 def table_tail(n=12):
-    out.append(f"% 表: tail指標（N = {n}）")
+    start_table("tail", f"tail指標（N = {n}）")
     cols = [("rms_vec_nm_mean", "平均"), ("rms_vec_nm_median", "中央値"), ("rms_vec_nm_p95", "P95"),
             ("rms_vec_nm_worst", "最悪"), ("p99_mag_nm_mean", "P99$|e|$"), ("max_mag_nm_mean", "Max$|e|$"),
             ("rms_vec_interior_nm_mean", "内側RMS")]
@@ -115,7 +134,7 @@ def table_tail(n=12):
 
 
 def table_paired(n=12, scen="base", props=("cdopt", "ciopt"), comps=("random", "poisson", "human", "dopt", "iopt")):
-    out.append(f"% 表: paired comparison（N = {n}, {scen}）")
+    start_table("paired", f"paired comparison（N = {n}, {scen}）")
     out.append("\\begin{tabular}{ccl" + "r" * 4 + "}\n\\toprule")
     out.append("次数 & 提案法 & 比較法 & 平均$\\Delta$RMS [nm] & 平均改善率 [\\%] & 95\\%CI [\\%] & 勝率 \\\\\n\\midrule")
     for o in ORDERS:
@@ -156,7 +175,7 @@ def summary_paired_over_n():
 
 
 def table_efficiency():
-    out.append("% 表: D/I-efficiency（強制shotなし）")
+    start_table("efficiency", "D/I-efficiency（強制shotなし）")
     ns = [8, 12, 19]
     out.append("\\begin{tabular}{cl" + "rr" * len(ns) + "}\n\\toprule")
     out.append("次数 & 手法 & " + " & ".join(f"\\multicolumn{{2}}{{c}}{{$N={n}$}}" for n in ns) + " \\\\")
@@ -177,7 +196,7 @@ def table_efficiency():
 
 
 def table_violation():
-    out.append("% 表: 制約違反とcoverage（全次数・全shot数の設計で集計）")
+    start_table("violation", "制約違反とcoverage（全次数・全shot数の設計で集計）")
     out.append("\\begin{tabular}{lrrrrrrr}\n\\toprule")
     out.append("手法 & 象限 & 半径 & scan & いずれか & $\\bar{B}_Q$ & $\\bar{B}_R$ & $\\bar{B}_S$ \\\\\n\\midrule")
     rows = [r for r in RDS if r["scenario"] == "base"]
@@ -197,7 +216,7 @@ def table_violation():
 
 
 def table_robust(n=12):
-    out.append(f"% 表: 条件ごとの平均RMS（N = {n}）")
+    start_table("robust", f"条件ごとの平均RMS（N = {n}）")
     conds = [("noise_low", "誤差0.25"), ("nominal", "0.5"), ("noise_high", "1.0"), ("scan_x0", "scan×0"),
              ("scan_x0.5", "×0.5"), ("scan_x2", "×2"), ("scan_x4", "×4")]
     meths = ["poisson", "human", "dopt", "iopt", "cdopt", "ciopt"]
@@ -224,7 +243,7 @@ def table_robust(n=12):
 
 
 def table_mandatory():
-    out.append("% 表: 強制計測shotありの平均RMS")
+    start_table("mandatory", "強制計測shotありの平均RMS")
     ns = [7, 8, 9, 10, 12, 15, 19]
     meths = ["random_f", "human_f", "dopt_aug", "cdopt_naive", "ciopt_naive", "cdopt_aug", "ciopt_aug"]
     out.append("\\begin{tabular}{cr" + "r" * len(meths) + "rr}\n\\toprule")
@@ -265,7 +284,7 @@ def table_mandatory():
 
 
 def table_reduction():
-    out.append("% 表: Humanと同じ平均RMSに必要な最小shot数（強制shotなし）")
+    start_table("reduction", "Humanと同じ平均RMSに必要な最小shot数（強制shotなし）")
     nrefs = [8, 12, 15, 19]
     meths = ["poisson", "dopt", "iopt", "cdopt", "ciopt"]
     out.append("\\begin{tabular}{cr" + "r" * len(meths) + "}\n\\toprule")
@@ -302,7 +321,7 @@ def table_reduction():
 
 
 def table_time():
-    out.append("% 表: 設計1件の計算時間 [s]（平均 / 最大）")
+    start_table("time", "設計1件の計算時間 [s]（平均 / 最大）")
     meths = [("base", "dopt"), ("base", "iopt"), ("base", "cdopt"), ("base", "ciopt"), ("mandatory", "cdopt_aug"),
              ("mandatory", "ciopt_aug"), ("base", "poisson")]
     out.append("\\begin{tabular}{c" + "r" * len(meths) + "}\n\\toprule")
@@ -327,7 +346,7 @@ def table_time():
 
 
 def table_soft():
-    out.append("% 表: soft制約（λ）")
+    start_table("soft", "soft制約（λ）")
     lams = ["0", "0.02", "0.05", "0.2", "1", "5"]
     out.append("\\begin{tabular}{crl" + "c" * len(lams) + "}\n\\toprule")
     out.append("次数 & $N$ & 基準 & " + " & ".join(f"$\\lambda={l}$" for l in lams) + " \\\\\n\\midrule")
@@ -395,7 +414,7 @@ if __name__ == "__main__":
     table_soft()
     edge_rms()
     misc()
-    target = ROOT / "report" / "generated_tables.tex"
-    target.write_text("\n".join(out), encoding="utf-8")
+    tables = collect_tables()
+    changed = replace_generated_blocks(tables)
     print("\n".join(line for line in out if line.startswith("%")))
-    print(f"\n書き出し: {target}")
+    print(f"\n{REPORT_TEX.name} の表 {len(tables)} 個を確認し、{len(changed)} 個を書き換えました: {changed}")

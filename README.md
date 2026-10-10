@@ -10,6 +10,7 @@ D 最適 / I 最適に選ぶ方法**を MATLAB で実装し、1000 枚の模擬 
   coverage（B_Q・B_R・B_S）、制約違反、paired comparison（bootstrap 信頼区間）、必要 shot 数の削減率
 - 技術報告書: `report/technical_report.tex`（Overleaf の LuaLaTeX でそのままコンパイルできる単独ファイル）
 - 説明資料: `docs/constrained-sampling-results-briefing.pptx`（24枚。生成元は `docs/results-briefing_src/`）
+- 実行手順書: `docs/simulation-guide/simulation-guide.html`（シミュレーションの実行から報告書への反映まで。ブラウザで開く）
 
 ## フォルダ構成
 
@@ -34,10 +35,10 @@ constrained-optimal-sampling/
 │   ├── plots/       本文の図と Appendix の図
 │   └── util/        乱数ストリーム・ログ・手法一覧など
 ├── tests/           test_study.m（runtests 形式）と test_config.json
-├── tools/           check_multistart.m（multi-start 回数が足りているかの確認）
+├── tools/           check_multistart.m（multi-start 回数の確認）と、報告書の表・参考文献を更新する Python スクリプト
 ├── results/         本計算の出力（csv/ は登録、figures/ と study_results.mat は再生成）
 ├── report/          technical_report.tex と figures/（報告書で使う図）
-├── docs/            結果の説明資料（PPTX は再生成。生成元は results-briefing_src/）
+├── docs/            結果の説明資料（PPTX は再生成。生成元は results-briefing_src/）と実行手順書（simulation-guide/）
 └── references/      references.json（参考文献の正本）と zotero/（Zotero 取り込み一式）
 ```
 
@@ -121,13 +122,15 @@ HOWA 次数ごとに、`4 × N ≥ p` を満たす最小の N から 1 shot ず�
 
 ## 報告書の更新（report/）
 
-- `report/technical_report.tex` は単独で完結する tex ファイルです。Overleaf では `report/` フォルダ（tex と `figures/`）をアップロードし、メニューの Compiler を **LuaLaTeX** にしてコンパイルします
-- 表の数値は `python3 tools/make_report_tables.py` が `results/csv` から作る `report/generated_tables.tex` を転記したものです（本文中の数値もこの出力と CSV で確認できます）
-- 参考文献リストは `python3 tools/make_bibliography.py` が `references/references.json` から作る `report/generated_bibliography.tex` を転記したものです
+- 報告書の tex は `report/technical_report.tex` の1ファイルだけです。Overleaf では `report/` フォルダ（tex と `figures/`）をアップロードし、メニューの Compiler を **LuaLaTeX** にしてコンパイルします
+- tex の中で `% <自動生成 名前>` と `% </自動生成 名前>` の印で囲んだ部分は、スクリプトが直接書き換えます（手で編集しない）
+  - 表10個: `python3 tools/make_report_tables.py` が `results/csv` から作り直します。画面に出る要約で本文中の数値も確認できます（本文は自動では変わりません）
+  - 参考文献リスト: `python3 tools/make_bibliography.py` が `references/references.json` から作り直します
 - 図は `results/figures/` から報告書で使う分を `report/figures/` にコピーしています。再計算したらコピーし直してください
 
 ## 説明資料の更新（docs/）
 
+- 実行から報告書・説明資料への反映までの手順は `docs/simulation-guide/simulation-guide.html` にまとめています（同じフォルダの CSS・JavaScript と一緒に開く）
 - 実験結果を説明する PowerPoint は `docs/results-briefing_src/` のスクリプトで作ります。手順は同フォルダの README を参照してください
 - 数値は `results/csv` から自動で取り出します。PPTX はバイナリのため Git に登録していません
 
